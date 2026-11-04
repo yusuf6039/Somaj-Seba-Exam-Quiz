@@ -93,9 +93,6 @@ button{font-family:inherit; cursor:pointer}
 .subj p{margin:1px 0 0; font-size:13px; color:var(--muted)}
 .subj .chev{margin-left:auto; color:var(--muted); flex:0 0 auto}
 .subj .chev svg{width:20px;height:20px}
-.bank-note{background:var(--card); border:1px dashed var(--orange); border-radius:16px; padding:13px 15px; font-size:13.5px; color:var(--ink2); line-height:1.6; margin-top:18px}
-.bank-note b{color:var(--ink)}
-
 /* ---------- QUIZ ---------- */
 .q-top{display:flex; align-items:center; gap:10px; margin-top:2px}
 .icon-btn{width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);display:flex;align-items:center;justify-content:center;flex:0 0 auto}
@@ -161,10 +158,6 @@ button{font-family:inherit; cursor:pointer}
 .rev .ra{color:var(--muted)}
 .rev .ra b.ok{color:var(--green2)} .rev .ra b.bad{color:var(--red)}
 .rev .re{color:var(--ink2); font-size:13.5px; margin-top:5px}
-.cats-btn{display:flex; align-items:center; justify-content:center; gap:9px; width:100%; margin-top:4px;
-  border:2px solid var(--orange); background:var(--card); color:var(--orange2); border-radius:16px; padding:14px;
-  font-size:16px; font-weight:700}
-.cats-btn svg{width:21px;height:21px}
 /* ---------- CATEGORY GRID ---------- */
 .cat-head{display:flex; align-items:center; gap:10px; margin-top:2px}
 .cat-head h2{margin:0; font-size:20px; flex:1; text-align:center; font-family:"Baloo Da 2",sans-serif}
@@ -183,6 +176,142 @@ button{font-family:inherit; cursor:pointer}
 .reset-btn{display:block; margin:20px auto 0; border:0; background:none; color:var(--muted); font-size:13.5px; font-weight:600; text-decoration:underline; padding:8px}
 footer{margin-top:26px; text-align:center; color:var(--muted); font-size:12.5px; line-height:1.7}
 </style>
+<style>
+/* ===== 2026 redesign: blue mobile-app theme (reference style, original) ===== */
+:root{
+  --bg:#e9effa; --bg2:#dce7f9; --card:#ffffff; --card2:#eef3fd;
+  --ink:#17233d; --ink2:#45557a; --muted:#7c8db0;
+  --blue:#1663e8; --blue2:#0d4fc0; --blue-soft:#e3edfd;
+  --orange:#1663e8; --orange2:#0d4fc0; --orange-soft:#e3edfd;
+  --green:#12a15f; --green2:#0c7c49; --green-soft:#e2f6ec;
+  --red:#d93a2b; --red-soft:#fdeae7;
+  --line:#dbe4f4; --shadow:0 10px 26px rgba(23,54,120,.13);
+  --ring-track:#dbe4f4;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0a1220; --bg2:#0d1730; --card:#141f38; --card2:#1a2947;
+    --ink:#eaf0fd; --ink2:#b3c2e2; --muted:#7f92b8;
+    --blue:#4d8dff; --blue2:#8db1ff; --blue-soft:#1a2c52;
+    --orange:#4d8dff; --orange2:#8db1ff; --orange-soft:#1a2c52;
+    --green:#2bbd82; --green2:#25a873; --green-soft:#0f2e22;
+    --red:#ff6a58; --red-soft:#3d1a13;
+    --line:#24365e; --shadow:0 10px 26px rgba(0,0,0,.45);
+    --ring-track:#24365e;
+  }
+  .subj,.cat-tile,.menu-tile,.stat,.continue,.note-card{box-shadow:0 4px 12px rgba(0,0,0,.35)}
+  .mi-blue{background:#1a2c52}.mi-violet{background:#2a1e4d}.mi-green{background:#0f2e22}
+  .mi-amber{background:#3a2c10}.mi-rose{background:#3d1626}.mi-teal{background:#0e2e2a}
+}
+.wrap{padding:18px 16px 108px}
+.avatar{background:linear-gradient(135deg,var(--blue),#5b93ff)}
+.sec-label svg{color:var(--blue2)}
+.stats{background:transparent; box-shadow:none; padding:0; border-radius:0; gap:11px}
+.stat{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:13px 14px; color:var(--ink); box-shadow:0 4px 12px rgba(23,54,120,.06)}
+.stat + .stat{border-left:1px solid var(--line)}
+.stat .ic{background:var(--blue-soft); color:var(--blue)}
+.stat span{color:var(--muted); opacity:1}
+.daily{background:linear-gradient(120deg,#0b4fc0 0%,#1663e8 100%)}
+.daily.mixed{background:linear-gradient(120deg,#0e9a68 0%,#0c7c49 100%)}
+.subj{box-shadow:0 4px 12px rgba(23,54,120,.06)}
+.cat-tile{box-shadow:0 4px 12px rgba(23,54,120,.06)}
+.cat-meta{background:var(--blue-soft)}
+.q-top h2{text-align:left}
+.skip-btn{color:var(--blue2)}
+.pbar i{background:linear-gradient(90deg,var(--blue),#5b93ff)}
+.q-meta{justify-content:flex-end; margin-bottom:2px}
+.q-subj{color:var(--blue2); background:var(--blue-soft)}
+.btn-again{background:linear-gradient(120deg,var(--blue),var(--blue2))}
+#scr-quiz{padding-bottom:104px}
+
+/* hero banner */
+.hero{position:relative; overflow:hidden; background:linear-gradient(120deg,#0d4fc0 0%,#1663e8 55%,#2f7bff 100%);
+  border-radius:22px; padding:20px 18px; color:#fff; box-shadow:var(--shadow); display:flex; align-items:center; gap:8px; margin-bottom:16px}
+.hero::after{content:""; position:absolute; right:-46px; top:-46px; width:150px; height:150px; border-radius:50%; background:rgba(255,255,255,.10)}
+.hero::before{content:""; position:absolute; left:-30px; bottom:-56px; width:120px; height:120px; border-radius:50%; background:rgba(255,255,255,.07)}
+.hero-txt{flex:1; position:relative; z-index:1; min-width:0}
+.hero h2{margin:0; font-family:"Baloo Da 2",sans-serif; font-size:24px; line-height:1.22; font-weight:800}
+.hero-sub{margin:7px 0 0; font-size:13.5px; opacity:.94; font-weight:600}
+.hero-bn{margin:5px 0 0; font-size:13px; opacity:.86; line-height:1.5}
+.hero-art{flex:0 0 auto; width:100px; position:relative; z-index:1}
+.hero-art svg{width:100%; height:auto; display:block}
+
+/* menu tile grid */
+.menu-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:11px; margin:2px 0 8px}
+.menu-tile{background:var(--card); border:1px solid var(--line); border-radius:18px; padding:15px 4px 12px;
+  display:flex; flex-direction:column; align-items:center; gap:8px; color:var(--ink);
+  font-weight:700; font-size:13px; line-height:1.3; text-align:center; box-shadow:0 4px 12px rgba(23,54,120,.06)}
+.menu-tile:active{transform:scale(.97)}
+.mt-ic{width:46px; height:46px; border-radius:50%; display:flex; align-items:center; justify-content:center}
+.mt-ic svg{width:24px; height:24px}
+.mi-blue{background:#e3edfd; color:#1663e8} .mi-violet{background:#efe7fd; color:#7c3aed}
+.mi-green{background:#e2f6ec; color:#0c9a5c} .mi-amber{background:#fdf0d5; color:#d97706}
+.mi-rose{background:#fde4ec; color:#db2777} .mi-teal{background:#dcf5f1; color:#0d9488}
+
+/* continue practice */
+.continue{display:flex; align-items:center; gap:13px; background:var(--card); border:1px solid var(--line);
+  border-radius:18px; padding:15px 16px; box-shadow:0 4px 12px rgba(23,54,120,.06)}
+.cont-ic{width:50px; height:50px; border-radius:14px; background:var(--blue-soft); color:var(--blue); display:flex; align-items:center; justify-content:center; flex:0 0 auto}
+.cont-ic svg{width:27px; height:27px}
+.cont-main{flex:1; min-width:0}
+.cont-main h3{margin:0; font-size:16.5px; font-family:"Baloo Da 2",sans-serif}
+.cont-main p{margin:1px 0 8px; font-size:12.5px; color:var(--muted); line-height:1.45}
+.cont-bar-row{display:flex; align-items:center; gap:9px}
+.cbar{height:8px; border-radius:99px; background:var(--ring-track); overflow:hidden; flex:1}
+.cbar i{display:block; height:100%; width:0; background:var(--blue); border-radius:99px; transition:width .4s ease}
+.cont-pct{font-size:12.5px; font-weight:700; color:var(--blue2); flex:0 0 auto}
+.play-btn{flex:0 0 auto; width:46px; height:46px; border-radius:50%; border:0; background:var(--blue); color:#fff;
+  display:flex; align-items:center; justify-content:center; box-shadow:0 6px 14px rgba(22,99,232,.35)}
+.play-btn svg{width:19px; height:19px; margin-left:2px}
+.play-btn:active{transform:scale(.94)}
+
+/* quiz info card (Time Left / Question x of N) */
+.q-info{display:flex; background:var(--card); border:1px solid var(--line); border-radius:16px; padding:12px 14px; margin-top:14px; box-shadow:0 4px 12px rgba(23,54,120,.05)}
+.qi{flex:1; display:flex; align-items:center; gap:10px; min-width:0}
+.qi-div{border-left:1px solid var(--line); padding-left:14px}
+.qi-ic{width:38px; height:38px; border-radius:50%; background:var(--blue-soft); color:var(--blue); display:flex; align-items:center; justify-content:center; flex:0 0 auto}
+.qi-ic svg{width:20px; height:20px}
+.qi label{display:block; font-size:12px; color:var(--muted); font-weight:600; line-height:1.2}
+.qi b{font-size:16.5px; color:var(--ink); font-family:"Baloo Da 2",sans-serif; line-height:1.25}
+.qi:first-child b{color:var(--blue)}
+
+/* quiz previous / next bar */
+.q-nav{position:fixed; left:50%; transform:translateX(-50%); bottom:0; width:100%; max-width:520px; z-index:30;
+  display:flex; gap:11px; padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+  background:var(--card); border-top:1px solid var(--line)}
+.prev-btn{flex:1; border:1px solid var(--line); background:var(--card2); color:var(--ink);
+  border-radius:14px; padding:15px 10px; font-size:16px; font-weight:700}
+.prev-btn:disabled{opacity:.4}
+.next-btn{display:block; visibility:hidden; flex:1.35; width:auto; margin:0; border:0; border-radius:14px; padding:15px 10px;
+  background:linear-gradient(120deg,var(--blue),var(--blue2)); color:#fff; font-size:16.5px; font-weight:700; box-shadow:var(--shadow)}
+.next-btn.show{visibility:visible}
+
+/* bottom tab bar */
+.tabbar{position:fixed; left:50%; transform:translateX(-50%); bottom:0; width:100%; max-width:520px; z-index:50;
+  background:var(--card); border-top:1px solid var(--line); display:flex; padding-bottom:env(safe-area-inset-bottom)}
+.tabbar button{flex:1; background:none; border:0; display:flex; flex-direction:column; align-items:center; gap:3px;
+  padding:9px 0 8px; color:var(--muted); font-size:11.5px; font-weight:600; min-height:56px; justify-content:center}
+.tabbar button svg{width:23px; height:23px}
+.tabbar button.active{color:var(--blue)}
+
+/* study / progress / profile */
+.note-card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:15px 16px; margin-bottom:11px; box-shadow:0 4px 12px rgba(23,54,120,.06)}
+.note-card h3{margin:0 0 5px; font-size:16px; font-family:"Baloo Da 2",sans-serif}
+.note-card p{margin:0; font-size:14px; line-height:1.65; color:var(--ink2)}
+.p-row{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:13px 15px; margin-bottom:10px}
+.p-top{display:flex; justify-content:space-between; align-items:center; font-size:15px; margin-bottom:8px}
+.p-top span{color:var(--blue2); font-weight:700; font-family:"Baloo Da 2",sans-serif}
+.p-row .cbar{flex:none}
+.p-row p{margin:7px 0 0; font-size:12.5px; color:var(--muted)}
+.pf-card{background:var(--card); border:1px solid var(--line); border-radius:20px; padding:22px 18px 12px; margin-top:16px; text-align:center; box-shadow:var(--shadow)}
+.pf-avatar{width:72px; height:72px; border-radius:50%; background:linear-gradient(135deg,var(--blue),#5b93ff); color:#fff; display:flex; align-items:center; justify-content:center; margin:0 auto 10px}
+.pf-avatar svg{width:38px; height:38px}
+.pf-card h3{margin:0; font-family:"Baloo Da 2",sans-serif; font-size:20px}
+.pf-card > p{margin:3px 0 8px; color:var(--muted); font-size:13.5px}
+.pf-rows{text-align:left; margin-top:6px}
+.pf-row{display:flex; justify-content:space-between; align-items:center; gap:10px; padding:11px 2px; border-top:1px solid var(--line); font-size:14.5px}
+.pf-row b{font-family:"Baloo Da 2",sans-serif}
+</style>
 </head>
 <body>
 <div class="wrap">
@@ -199,6 +328,25 @@ footer{margin-top:26px; text-align:center; color:var(--muted); font-size:12.5px;
       </div>
     </div>
 
+    <div class="hero">
+      <div class="hero-txt">
+        <h2>MCQ Practice &amp;<br>Exam Preparation</h2>
+        <p class="hero-sub">Practice • Learn • Exam</p>
+        <p class="hero-bn">সমাজসেবা অধিদপ্তর (DSS) নিয়োগ পরীক্ষা ২০২৬-এর পূর্ণ প্রস্তুতি</p>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 120 104" fill="none">
+          <rect x="18" y="80" width="84" height="13" rx="3" fill="#ffffff"/>
+          <rect x="24" y="66" width="72" height="13" rx="3" fill="#ffd166"/>
+          <rect x="30" y="52" width="60" height="13" rx="3" fill="#ff8fa3"/>
+          <path d="M60 10 L107 29 L60 48 L13 29 Z" fill="#14213d"/>
+          <path d="M38 38.5 V55 c0 6.5 9.8 11 22 11 s22-4.5 22-11 V38.5 L60 48 Z" fill="#1d2f52"/>
+          <path d="M107 29 v15" stroke="#ffd166" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="107" cy="49" r="4" fill="#ffd166"/>
+        </svg>
+      </div>
+    </div>
+
     <div class="stats">
       <div class="stat">
         <div class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.6 5.9 6.4.5-4.9 4.2 1.6 6.3L12 15.7l-5.7 3.2 1.6-6.3L3 8.4l6.4-.5L12 2z"/></svg></div>
@@ -208,6 +356,33 @@ footer{margin-top:26px; text-align:center; color:var(--muted); font-size:12.5px;
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v6a5 5 0 0 1-10 0V4z"/><path d="M7 6H4a2 2 0 0 0 0 4h3M17 6h3a2 2 0 0 1 0 4h-3"/></svg></div>
         <div><b id="stat-best">০</b><span>সেরা স্কোর</span></div>
       </div>
+    </div>
+
+    <div class="menu-grid">
+      <button class="menu-tile" id="tile-practice">
+        <span class="mt-ic mi-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/></svg></span>
+        Practice MCQ
+      </button>
+      <button class="menu-tile" id="tile-mock">
+        <span class="mt-ic mi-violet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6v3H9z"/><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><path d="M9 12h6M9 16h4"/></svg></span>
+        Mock Exam
+      </button>
+      <button class="menu-tile" id="tile-topic">
+        <span class="mt-ic mi-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13.5l9 5 9-5"/></svg></span>
+        Topic Wise Test
+      </button>
+      <button class="menu-tile" id="tile-prev">
+        <span class="mt-ic mi-amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1"/><path d="M3.5 4.5v4h4"/><path d="M12 8v4.5l3 2"/></svg></span>
+        Previous Pattern
+      </button>
+      <button class="menu-tile" id="tile-study">
+        <span class="mt-ic mi-rose"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5C10 5 7.5 4.5 4 4.5v13c3.5 0 6 .5 8 2 2-1.5 4.5-2 8-2v-13c-3.5 0-6 .5-8 2z"/><path d="M12 6.5v13"/></svg></span>
+        Study Materials
+      </button>
+      <button class="menu-tile" id="tile-results">
+        <span class="mt-ic mi-teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M6 20v-6M12 20V6M18 20v-9"/><path d="M3 20h18"/></svg></span>
+        Results &amp; Progress
+      </button>
     </div>
 
     <div class="sec-label"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L4.9 13.5H11L9.5 22 19 10h-6.1L13 2z"/></svg>আজকের প্র্যাকটিস</div>
@@ -221,12 +396,31 @@ footer{margin-top:26px; text-align:center; color:var(--muted); font-size:12.5px;
     </button>
     <p class="pattern-note">প্যাটার্নটি ইউনিয়ন সমাজকর্মী (গ্রেড ১৬) পদের বিগত বছরের প্রশ্নের ধারা অনুযায়ী: লিখিত (MCQ) ৭০ নম্বর + ভাইভা ৩০ নম্বর। ২০২৬-এর অফিসিয়াল বিষয়ভিত্তিক সিলেবাস প্রকাশিত না হওয়ায় এটি চূড়ান্ত ধরে নেওয়া যাবে না — অ্যাডমিট কার্ড / DSS নোটিশে মিলিয়ে নিন।</p>
 
-    <div class="sec-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>বিষয় অনুযায়ী পড়া চালিয়ে যান</div>
+    <button class="daily mixed" id="btn-mixed" style="margin-top:12px">
+      <div class="ring-mini">সব</div>
+      <div>
+        <h3>Mixed Test — সব বিষয় মিশিয়ে</h3>
+        <p>বিষয় আলাদা নয় — বাংলা • English • গণিত • GK • সমাজসেবা একসাথে মিশিয়ে ৫০টি প্রশ্নের ফুল টেস্ট</p>
+      </div>
+      <div class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div>
+    </button>
+
+    <div class="sec-label"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Continue Practice — যেখানে থেমেছিলেন</div>
+    <div class="continue">
+      <div class="cont-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 9L12 4 2 9l10 5 10-5z"/><path d="M6 11.5V16c0 1.7 2.7 3 6 3s6-1.3 6-3v-4.5"/><path d="M22 9v5"/></svg></div>
+      <div class="cont-main">
+        <h3 id="cont-name">বাংলা — প্র্যাকটিস</h3>
+        <p id="cont-sub">পরের ধাপ ১ • ব্যাংকে দেখা হয়েছে ০/০টি প্রশ্ন</p>
+        <div class="cont-bar-row">
+          <div class="cbar"><i id="cont-bar"></i></div>
+          <span class="cont-pct" id="cont-pct">০%</span>
+        </div>
+      </div>
+      <button class="play-btn" id="btn-continue" data-cont="bn" aria-label="প্র্যাকটিস চালিয়ে যান"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+    </div>
+
+    <div class="sec-label" id="subj-anchor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>বিষয় অনুযায়ী পড়া চালিয়ে যান</div>
     <div id="subj-list"></div>
-
-    <button class="cats-btn" id="btn-cats"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>প্রশ্ন ব্যাংক — ক্যাটাগরি দেখুন</button>
-
-    <div class="bank-note" id="bank-note"></div>
 
     <footer>সব প্রশ্ন অরিজিনাল প্র্যাকটিস প্রশ্ন — বিগত বছরের প্রশ্নের টপিক ও ধারা অনুযায়ী তৈরি।<br>ফ্রি • অফলাইন • কোনো AI বা API কী লাগে না</footer>
   </section>
@@ -250,9 +444,18 @@ footer{margin-top:26px; text-align:center; color:var(--muted); font-size:12.5px;
       <h2 id="q-title">Quiz</h2>
       <button class="skip-btn" id="btn-skip">Skip</button>
     </div>
+    <div class="q-info">
+      <div class="qi">
+        <span class="qi-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+        <span><label>Time Left</label><b id="q-timeleft">০০:০০:০০</b></span>
+      </div>
+      <div class="qi qi-div">
+        <span class="qi-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="M9.5 12.5h5M9.5 16.5h5"/></svg></span>
+        <span><label>Question</label><b><span id="q-now">১</span> of <span id="q-total">২০</span></b></span>
+      </div>
+    </div>
     <div class="pbar"><i id="pbar-fill"></i></div>
     <div class="q-meta">
-      <div class="q-count"><b id="q-now">১</b> / <span id="q-total">২০</span></div>
       <div class="q-score">স্কোর: <span id="q-score">০</span></div>
     </div>
     <div class="q-card">
@@ -267,6 +470,9 @@ footer{margin-top:26px; text-align:center; color:var(--muted); font-size:12.5px;
       <div class="q-text" id="q-text"></div>
       <div class="opts" id="q-opts"></div>
       <div class="explain" id="q-explain"></div>
+    </div>
+    <div class="q-nav">
+      <button class="prev-btn" id="btn-prev">← Previous</button>
       <button class="next-btn" id="btn-next">Next →</button>
     </div>
   </section>
@@ -293,7 +499,94 @@ footer{margin-top:26px; text-align:center; color:var(--muted); font-size:12.5px;
     <div class="review-h">উত্তর রিভিউ</div>
     <div id="review-list"></div>
   </section>
+
+  <!-- ============ STUDY MATERIALS ============ -->
+  <section id="scr-study" class="screen">
+    <div class="cat-head">
+      <button class="icon-btn" id="btn-study-back" aria-label="হোমে ফিরুন"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+      <h2>স্টাডি ম্যাটেরিয়াল</h2>
+      <div class="spacer"></div>
+    </div>
+    <p class="cat-intro">সমাজসেবা অধিদপ্তর (DSS) নিয়োগ পরীক্ষা ২০২৬-এর প্রস্তুতির জন্য বিষয়ভিত্তিক গাইডলাইন — কোন বিষয়ে কোন টপিকগুলো গুরুত্ব দিয়ে পড়বেন।</p>
+    <div class="note-card">
+      <h3>পরীক্ষার ধরন</h3>
+      <p>ইউনিয়ন সমাজকর্মী (গ্রেড ১৬) পদের বিগত বছরের ধারা অনুযায়ী লিখিত (MCQ) পরীক্ষা ৭০ নম্বরের এবং ভাইভা ৩০ নম্বরের হয়। ২০২৬-এর অফিসিয়াল বিষয়ভিত্তিক সিলেবাস প্রকাশিত না হওয়ায় এটি চূড়ান্ত নয় — অ্যাডমিট কার্ড / DSS নোটিশে মিলিয়ে নিন।</p>
+    </div>
+    <div class="note-card">
+      <h3>বাংলা</h3>
+      <p>ব্যাকরণ: সন্ধি, সমাস, কারক ও বিভক্তি, উপসর্গ-প্রত্যয়, সমার্থক ও বিপরীত শব্দ, বাগধারা ও প্রবাদ, শুদ্ধ বানান, এক কথায় প্রকাশ। সাহিত্য: চর্যাপদ, রবীন্দ্রনাথ, নজরুল, জসীমউদ্দীন, জীবনানন্দসহ প্রধান লেখকদের রচনা ও ছদ্মনাম।</p>
+    </div>
+    <div class="note-card">
+      <h3>English</h3>
+      <p>Parts of speech, tense, subject-verb agreement, voice, narration, preposition ও appropriate preposition, synonyms-antonyms, spelling, idioms — প্রতিদিন অল্প অল্প করে vocabulary পড়ুন।</p>
+    </div>
+    <div class="note-card">
+      <h3>গণিত</h3>
+      <p>শতকরা, লাভ-ক্ষতি, সরল ও চক্রবৃদ্ধি সুদ, অনুপাত-সমানুপাত, গড়, বীজগণিতের সূত্রাবলি, উৎপাদক, জ্যামিতির মৌলিক ধারণা ও মানসিক দক্ষতা (সংখ্যা ধারা, সাদৃশ্য)। সূত্র মুখস্থের পাশাপাশি শর্টকাট অনুশীলন করুন।</p>
+    </div>
+    <div class="note-card">
+      <h3>সাধারণ জ্ঞান</h3>
+      <p>বাংলাদেশের ইতিহাস ও মুক্তিযুদ্ধ, সংবিধান, ভূগোল ও নদ-নদী, জাতীয় প্রতীক ও দিবস, সাম্প্রতিক ঘটনাবলি, আন্তর্জাতিক সংস্থা (জাতিসংঘ, সার্ক) ও বিশ্বের প্রধান তথ্য।</p>
+    </div>
+    <div class="note-card">
+      <h3>সমাজসেবা (DSS)</h3>
+      <p>সমাজসেবা অধিদপ্তরের গঠন ও কার্যক্রম: বয়স্ক ভাতা, বিধবা ভাতা, প্রতিবন্ধী ভাতা ও শিক্ষা উপবৃত্তি, বীর মুক্তিযোদ্ধা সম্মানী, ভিজিএফ/ভিজিডি কর্মসূচি, শিশু সুরক্ষা, প্রবেশন ও পুনর্বাসন — এবং ইউনিয়ন সমাজকর্মীর দায়িত্ব ও কাজের ধারা।</p>
+    </div>
+    <div class="note-card">
+      <h3>প্রস্তুতির টিপস</h3>
+      <p>প্রতিদিন অন্তত একটি ধাপ (১০০ প্রশ্ন) বা একটি Mixed Test শেষ করুন। ভুল হওয়া প্রশ্নের ব্যাখ্যা মনোযোগ দিয়ে পড়ুন — পরীক্ষায় একই টপিক ঘুরে আসে। সপ্তাহে অন্তত দুই দিন Daily Quiz দিয়ে সময় ব্যবস্থাপনা যাচাই করুন।</p>
+    </div>
+  </section>
+
+  <!-- ============ RESULTS & PROGRESS ============ -->
+  <section id="scr-progress" class="screen">
+    <div class="cat-head">
+      <button class="icon-btn" id="btn-progress-back" aria-label="হোমে ফিরুন"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+      <h2>ফলাফল ও অগ্রগতি</h2>
+      <div class="spacer"></div>
+    </div>
+    <div class="res-grid" style="margin-top:16px">
+      <div class="cell"><b id="pg-points">০</b><span>মোট পয়েন্ট</span></div>
+      <div class="cell"><b id="pg-best">০%</b><span>সেরা স্কোর</span></div>
+      <div class="cell"><b id="pg-played">০</b><span>টেস্ট দিয়েছেন</span></div>
+    </div>
+    <div class="sec-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 20v-6M12 20V6M18 20v-9"/><path d="M3 20h18"/></svg>বিষয়ভিত্তিক অগ্রগতি</div>
+    <div id="pg-list"></div>
+    <p class="pattern-note">কোন বিষয়ে কতটি প্রশ্ন দেখা হয়েছে তা এই ব্রাউজারে সংরক্ষিত থাকে — পুরো ব্যাংক শেষ না হওয়া পর্যন্ত দেখা প্রশ্ন আবার আসে না। পয়েন্ট ও সেরা স্কোর এই সেশনের হিসাব।</p>
+  </section>
+
+  <!-- ============ PROFILE ============ -->
+  <section id="scr-profile" class="screen">
+    <div class="cat-head">
+      <button class="icon-btn" id="btn-profile-back" aria-label="হোমে ফিরুন"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+      <h2>প্রোফাইল</h2>
+      <div class="spacer"></div>
+    </div>
+    <div class="pf-card">
+      <div class="pf-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 9L12 4 2 9l10 5 10-5z"/><path d="M6 11.5V16c0 1.7 2.7 3 6 3s6-1.3 6-3v-4.5"/><path d="M22 9v5"/></svg></div>
+      <h3>পরীক্ষার্থী</h3>
+      <p>সমাজসেবা অধিদপ্তর (DSS) নিয়োগ পরীক্ষা ২০২৬</p>
+      <div class="pf-rows">
+        <div class="pf-row"><span>মোট প্রশ্ন ব্যাংক</span><b id="pf-bank">০</b></div>
+        <div class="pf-row"><span>এ পর্যন্ত দেখা প্রশ্ন</span><b id="pf-seen">০</b></div>
+        <div class="pf-row"><span>মোট পয়েন্ট (এই সেশন)</span><b id="pf-points">০</b></div>
+        <div class="pf-row"><span>সেরা স্কোর (এই সেশন)</span><b id="pf-best">০%</b></div>
+        <div class="pf-row"><span>টেস্ট দিয়েছেন (এই সেশন)</span><b id="pf-played">০</b></div>
+      </div>
+    </div>
+    <button class="reset-btn" id="btn-reset2">দেখা-প্রশ্নের হিসাব রিসেট করুন (সব প্রশ্ন আবার শুরু থেকে)</button>
+    <p class="pattern-note" style="text-align:center">আপনার অগ্রগতি শুধু এই ফোনের ব্রাউজারেই সংরক্ষিত থাকে — কোনো অ্যাকাউন্ট লাগে না।</p>
+  </section>
 </div>
+
+<!-- ============ BOTTOM NAVIGATION ============ -->
+<nav class="tabbar" id="tabbar">
+  <button data-nav="home" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5.5 9.5V20a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1V9.5"/><path d="M9.5 21v-6h5v6"/></svg><span>Home</span></button>
+  <button data-nav="practice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/></svg><span>Practice</span></button>
+  <button data-nav="exam"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6v3H9z"/><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><path d="M9 12h6M9 16h4"/></svg><span>Exam</span></button>
+  <button data-nav="result"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M6 20v-6M12 20V6M18 20v-9"/><path d="M3 20h18"/></svg><span>Result</span></button>
+  <button data-nav="profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5c1.4-3.8 4.4-5.2 7.5-5.2s6.1 1.4 7.5 5.2"/></svg><span>Profile</span></button>
+</nav>
 
 <script>
 /* =====================================================================
@@ -1498,7 +1791,12 @@ function bumpStep(s){ var v = stepNo(s) + 1; store.set("ssq26_step_" + s.id, Str
 /* ---- helpers ---- */
 var el = function(id){ return document.getElementById(id); };
 function show(id){
-  ["scr-home","scr-cats","scr-quiz","scr-result"].forEach(function(x){ el(x).classList.toggle("on", x === id); });
+  ["scr-home","scr-cats","scr-quiz","scr-result","scr-study","scr-progress","scr-profile"].forEach(function(x){ el(x).classList.toggle("on", x === id); });
+  var nav = el("tabbar");
+  nav.style.display = (id === "scr-quiz" || id === "scr-result") ? "none" : "flex";
+  var map = { "scr-home": "home", "scr-cats": "practice", "scr-study": "practice", "scr-progress": "result", "scr-profile": "profile" };
+  var items = nav.querySelectorAll("[data-nav]");
+  for (var i = 0; i < items.length; i++){ items[i].classList.toggle("active", items[i].getAttribute("data-nav") === map[id]); }
   window.scrollTo(0, 0);
 }
 function subjById(id){ return SUBJECTS.filter(function(x){ return x.id === id; })[0]; }
@@ -1517,12 +1815,8 @@ function renderHome(){
       + '</button>';
   });
   el("subj-list").innerHTML = html;
-  el("bank-note").innerHTML = "<b>প্রশ্ন ব্যাংক:</b> বর্তমানে মোট <b>" + bn(TOTAL_BANK) + "টি</b> অরিজিনাল প্রশ্ন ("
-    + SUBJECTS.map(function(s){ return s.name + " " + bn(s.bank.length); }).join(" • ") + ")। "
-    + "প্রতি ক্যাটাগরির লক্ষ্য ১০০০টি করে (সব মিলিয়ে ৫০০০) — ব্যাচে ব্যাচে প্রশ্ন যোগ হচ্ছে। "
-    + "প্রতিটি ক্যাটাগরি <b>১০০টি করে ধাপে</b> চলে: এক ধাপ শেষ হলে পরের ধাপে আসে পরের ১০০টি প্রশ্ন — নতুন প্রশ্নগুলো সবসময় আগে আসে। "
-    + "আপনি কোন কোন প্রশ্ন দেখেছেন তা এই ব্রাউজারে মনে রাখা হয় — নতুন করে লিংক খুললেও আগের প্রশ্ন আবার আসবে না; পুরো ব্যাংক শেষ হলেই কেবল প্রশ্ন আবার ঘুরে আসবে, নতুন করে শাফল হয়ে।";
   bindSubjButtons(el("subj-list"));
+  renderContinue();
 }
 function bindSubjButtons(root){
   var btns = root.querySelectorAll("[data-subj]");
@@ -1582,6 +1876,8 @@ function shuffleArr(a){
 }
 function renderQuestion(){
   stopTimers();
+  el("btn-prev").disabled = quiz.idx === 0;
+  if (quiz.idx < quiz.history.length){ renderReview(); return; }
   var item = quiz.items[quiz.idx];
   var raw = item.q;
   el("q-now").textContent = bn(quiz.idx + 1);
@@ -1593,7 +1889,7 @@ function renderQuestion(){
   el("q-explain").innerHTML = "";
   el("btn-next").className = "next-btn";
   var order = shuffleArr([0, 1, 2, 3]);
-  var letters = ["ক", "খ", "গ", "ঘ"];
+  var letters = ["A", "B", "C", "D"];
   var html = "";
   order.forEach(function(orig, pos){
     html += '<button class="opt" data-orig="' + orig + '"><span class="ltr">' + letters[pos] + '</span><span>' + raw[1][orig] + '</span><span class="mark"></span></button>';
@@ -1620,6 +1916,7 @@ function drawRing(){
   el("ring-arc").style.stroke = timeLeft <= 7 ? "var(--red)" : "var(--orange)";
   el("timer-num").textContent = bn(Math.ceil(timeLeft));
   el("timer-ring").classList.toggle("low", timeLeft <= 7);
+  if (quiz) el("q-timeleft").textContent = fmtTime(Math.ceil(timeLeft) + (quiz.items.length - quiz.idx - 1) * QTIME);
 }
 function lockOptions(chosenOrig, raw){
   var opts = el("q-opts").querySelectorAll(".opt");
@@ -1666,6 +1963,7 @@ function timeoutAnswer(raw){
 }
 function skipQuestion(){
   if (!quiz) return;
+  if (quiz.idx < quiz.history.length){ nextQuestion(); return; }
   stopTimers();
   quiz.skip++;
   quiz.history.push({ item: quiz.items[quiz.idx], chosen: -2, ok: false, skipped: true });
@@ -1710,20 +2008,150 @@ function showResult(){
   show("scr-result");
 }
 
+/* ---- extra modes & screens (redesign) ---- */
+function fmtTime(sec){
+  sec = Math.max(0, Math.round(sec));
+  var h = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60), s = sec % 60;
+  function p(x){ return (x < 10 ? "0" : "") + x; }
+  return bn(p(h)) + ":" + bn(p(m)) + ":" + bn(p(s));
+}
+/* Mixed Test: all five subjects shuffled together, 10 each = 50 */
+function buildMixedTest(){
+  var set = [];
+  SUBJECTS.forEach(function(s){ set = set.concat(takeFromSubject(s, 10)); });
+  return shuffleArr(set);
+}
+/* Previous Pattern Test: 50 questions in past-paper proportion */
+function buildPrevPattern(){
+  var set = [];
+  set = set.concat(takeFromSubject(subjById("bn"), 15));
+  set = set.concat(takeFromSubject(subjById("en"), 15));
+  set = set.concat(takeFromSubject(subjById("ma"), 10));
+  set = set.concat(takeFromSubject(subjById("gk"), 7));
+  set = set.concat(takeFromSubject(subjById("dss"), 3));
+  return shuffleArr(set);
+}
+function renderContinue(){
+  var best = null;
+  SUBJECTS.forEach(function(s){
+    var seen = seenInCycle(s);
+    var frac = s.bank.length ? seen / s.bank.length : 0;
+    if (!best || frac > best.frac) best = { s: s, seen: seen, frac: frac };
+  });
+  var pct = Math.round(best.frac * 100);
+  el("cont-name").textContent = best.s.name + " — প্র্যাকটিস";
+  el("cont-sub").textContent = "পরের ধাপ " + bn(stepNo(best.s) + 1) + " • ব্যাংকে দেখা হয়েছে " + bn(best.seen) + "/" + bn(best.s.bank.length) + "টি প্রশ্ন";
+  el("cont-bar").style.width = pct + "%";
+  el("cont-pct").textContent = bn(pct) + "%";
+  el("btn-continue").setAttribute("data-cont", best.s.id);
+}
+function renderProgress(){
+  el("pg-points").textContent = bn(session.points);
+  el("pg-best").textContent = bn(session.best) + "%";
+  el("pg-played").textContent = bn(session.played);
+  var html = "";
+  SUBJECTS.forEach(function(s){
+    var seen = seenInCycle(s);
+    var pct = s.bank.length ? Math.round(seen / s.bank.length * 100) : 0;
+    html += '<div class="p-row"><div class="p-top"><b>' + s.name + '</b><span>' + bn(pct) + '%</span></div>'
+      + '<div class="cbar"><i style="width:' + pct + '%"></i></div>'
+      + '<p>দেখা হয়েছে ' + bn(seen) + ' / ' + bn(s.bank.length) + 'টি প্রশ্ন • পরের ধাপ ' + bn(stepNo(s) + 1) + '</p></div>';
+  });
+  el("pg-list").innerHTML = html;
+}
+function renderProfile(){
+  var seenTotal = 0;
+  SUBJECTS.forEach(function(s){ seenTotal += seenInCycle(s); });
+  el("pf-bank").textContent = bn(TOTAL_BANK) + "টি";
+  el("pf-seen").textContent = bn(seenTotal) + "টি";
+  el("pf-points").textContent = bn(session.points);
+  el("pf-best").textContent = bn(session.best) + "%";
+  el("pf-played").textContent = bn(session.played) + "টি";
+}
+function resetProgress(){
+  SUBJECTS.forEach(function(s){ store.del("ssq26_deck_" + s.id); store.del("ssq26_step_" + s.id); });
+}
+/* Review render: an already-answered question shown locked when
+   the student taps Previous. No timer, no re-answering. */
+function renderReview(){
+  var item = quiz.items[quiz.idx], raw = item.q, h = quiz.history[quiz.idx];
+  el("q-now").textContent = bn(quiz.idx + 1);
+  el("q-score").textContent = bn(quiz.score);
+  el("pbar-fill").style.width = (quiz.idx / quiz.items.length * 100) + "%";
+  el("q-subj").textContent = item.s;
+  el("q-text").textContent = raw[0];
+  el("q-timeleft").textContent = fmtTime((quiz.items.length - quiz.history.length) * QTIME);
+  el("ring-arc").style.strokeDashoffset = "0";
+  el("ring-arc").style.stroke = "var(--green)";
+  el("timer-num").textContent = "✓";
+  el("timer-ring").classList.remove("low");
+  var letters = ["A", "B", "C", "D"];
+  var check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+  var cross = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>';
+  var html = "";
+  for (var i = 0; i < 4; i++){
+    var cls = "opt", mark = "";
+    if (i === raw[2]){ cls += " right"; mark = check; }
+    else if (i === h.chosen){ cls += " wrong"; mark = cross; }
+    else { cls += " dim"; }
+    html += '<button class="' + cls + '" disabled><span class="ltr">' + letters[i] + '</span><span>' + raw[1][i] + '</span><span class="mark">' + mark + '</span></button>';
+  }
+  el("q-opts").innerHTML = html;
+  var box = el("q-explain");
+  box.className = "explain show " + (h.ok ? "ok" : "bad");
+  var status = h.skipped ? (h.chosen === -1 ? "সময় শেষ হয়েছিল" : "স্কিপ করা হয়েছিল") : (h.ok ? "আপনি সঠিক উত্তর দিয়েছিলেন" : "আপনি ভুল উত্তর দিয়েছিলেন");
+  box.innerHTML = "<b>রিভিউ — " + status + "</b>সঠিক উত্তর: <b>" + raw[1][raw[2]] + "</b><br>" + raw[3];
+  el("btn-next").className = "next-btn show";
+  el("btn-next").textContent = "Next →";
+}
+function prevQuestion(){
+  if (!quiz || quiz.idx === 0) return;
+  stopTimers();
+  quiz.idx--;
+  renderQuestion();
+}
+
 /* ---- wiring ---- */
 el("btn-daily").addEventListener("click", function(){ startQuiz("Daily Quiz — ফুল মডেল টেস্ট", buildFullTest(), { type: "daily" }); });
-el("btn-cats").addEventListener("click", function(){ renderCats(); show("scr-cats"); });
 el("btn-cats-back").addEventListener("click", function(){ renderHome(); show("scr-home"); });
-el("btn-reset").addEventListener("click", function(){
-  SUBJECTS.forEach(function(s){ store.del("ssq26_deck_" + s.id); store.del("ssq26_step_" + s.id); });
-  renderCats();
-});
+el("btn-reset").addEventListener("click", function(){ resetProgress(); renderCats(); });
 el("btn-next").addEventListener("click", nextQuestion);
 el("btn-skip").addEventListener("click", skipQuestion);
 el("btn-quit").addEventListener("click", function(){ stopTimers(); quiz = null; renderHome(); show("scr-home"); });
 el("btn-home").addEventListener("click", function(){ renderHome(); show("scr-home"); });
-el("btn-again").addEventListener("click", function(){ startQuiz("Daily Quiz — ফুল মডেল টেস্ট", buildFullTest(), { type: "daily" }); });
+el("btn-again").addEventListener("click", function(){
+  var t = quiz && quiz.mode ? quiz.mode.type : "daily";
+  if (t === "mixed") startQuiz("Mixed Test — সব বিষয় মিশিয়ে ফুল টেস্ট", buildMixedTest(), { type: "mixed" });
+  else if (t === "prev") startQuiz("বিগত প্যাটার্ন টেস্ট — ৫০ প্রশ্ন", buildPrevPattern(), { type: "prev" });
+  else startQuiz("Daily Quiz — ফুল মডেল টেস্ট", buildFullTest(), { type: "daily" });
+});
 el("btn-nextstep").addEventListener("click", function(){ if (quiz && quiz.mode && quiz.mode.id) startSubject(quiz.mode.id); });
+
+/* ---- redesign wiring: tiles, mixed test, bottom nav ---- */
+el("btn-prev").addEventListener("click", prevQuestion);
+el("btn-mixed").addEventListener("click", function(){ startQuiz("Mixed Test — সব বিষয় মিশিয়ে ফুল টেস্ট", buildMixedTest(), { type: "mixed" }); });
+el("tile-practice").addEventListener("click", function(){ show("scr-home"); setTimeout(function(){ el("subj-anchor").scrollIntoView({ block: "start" }); }, 60); });
+el("tile-mock").addEventListener("click", function(){ startQuiz("Mock Exam — ফুল মডেল টেস্ট", buildFullTest(), { type: "daily" }); });
+el("tile-topic").addEventListener("click", function(){ renderCats(); show("scr-cats"); });
+el("tile-prev").addEventListener("click", function(){ startQuiz("বিগত প্যাটার্ন টেস্ট — ৫০ প্রশ্ন", buildPrevPattern(), { type: "prev" }); });
+el("tile-study").addEventListener("click", function(){ show("scr-study"); });
+el("tile-results").addEventListener("click", function(){ renderProgress(); show("scr-progress"); });
+el("btn-continue").addEventListener("click", function(){ startSubject(this.getAttribute("data-cont")); });
+el("btn-study-back").addEventListener("click", function(){ renderHome(); show("scr-home"); });
+el("btn-progress-back").addEventListener("click", function(){ renderHome(); show("scr-home"); });
+el("btn-profile-back").addEventListener("click", function(){ renderHome(); show("scr-home"); });
+el("btn-reset2").addEventListener("click", function(){ resetProgress(); renderProfile(); renderHome(); });
+var navBtns = el("tabbar").querySelectorAll("[data-nav]");
+for (var ni = 0; ni < navBtns.length; ni++){
+  navBtns[ni].addEventListener("click", function(){
+    var k = this.getAttribute("data-nav");
+    if (k === "home"){ renderHome(); show("scr-home"); }
+    else if (k === "practice"){ renderCats(); show("scr-cats"); }
+    else if (k === "exam"){ startQuiz("Mock Exam — ফুল মডেল টেস্ট", buildFullTest(), { type: "daily" }); }
+    else if (k === "result"){ renderProgress(); show("scr-progress"); }
+    else if (k === "profile"){ renderProfile(); show("scr-profile"); }
+  });
+}
 renderHome();
 
 </script>
