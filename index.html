@@ -1,0 +1,931 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>Midwifery MCQ Quiz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Lora:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #eef4f2;
+        --surface: #ffffff;
+        --surface-2: #f2f7f5;
+        --ink: #12211d;
+        --ink-soft: #47605a;
+        --line: #d7e3df;
+        --accent: #0e7c6b;
+        --accent-dark: #0a5f52;
+        --accent-soft: #dff0ec;
+        --good: #178a50;
+        --good-soft: #e0f3e7;
+        --bad: #cf3d3d;
+        --bad-soft: #fbe7e7;
+        --warn: #b97a12;
+        --shadow: 0 18px 44px rgba(10, 50, 42, 0.12);
+        --radius: 18px;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0c1412;
+          --surface: #15201d;
+          --surface-2: #1a2824;
+          --ink: #e8f1ee;
+          --ink-soft: #9db8b1;
+          --line: #2a3d38;
+          --accent: #2fbfa5;
+          --accent-dark: #2fbfa5;
+          --accent-soft: #173b34;
+          --good: #4ecb8a;
+          --good-soft: #173a28;
+          --bad: #f08080;
+          --bad-soft: #3d2020;
+          --warn: #e0aa4e;
+          --shadow: 0 18px 44px rgba(0, 0, 0, 0.45);
+        }
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; }
+      body {
+        font-family: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+        background: var(--bg);
+        color: var(--ink);
+        min-height: 100vh;
+        -webkit-font-smoothing: antialiased;
+      }
+      .wrap { max-width: 760px; margin: 0 auto; padding: 28px 16px 56px; }
+
+      /* ---------- Start screen ---------- */
+      .hero { text-align: center; padding: 30px 8px 6px; }
+      .hero .mark {
+        width: 64px; height: 64px; margin: 0 auto 18px;
+        border-radius: 20px; background: var(--accent); color: #fff;
+        display: flex; align-items: center; justify-content: center;
+        box-shadow: var(--shadow);
+      }
+      .hero h1 {
+        font-family: "Lora", Georgia, serif; font-weight: 600;
+        font-size: clamp(2rem, 6vw, 2.9rem); line-height: 1.12; margin: 0 0 12px;
+      }
+      .hero p { color: var(--ink-soft); font-size: 1.05rem; line-height: 1.6; margin: 0 auto; max-width: 520px; }
+      .stat-row {
+        display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 26px 0 8px;
+      }
+      .stat-chip {
+        background: var(--surface); border: 1px solid var(--line); border-radius: 999px;
+        padding: 8px 16px; font-size: 0.88rem; font-weight: 700; color: var(--ink);
+        display: inline-flex; align-items: center; gap: 7px;
+      }
+      .stat-chip svg { color: var(--accent); flex: none; }
+      .card {
+        background: var(--surface); border: 1px solid var(--line);
+        border-radius: var(--radius); box-shadow: var(--shadow);
+        padding: 24px; margin-top: 22px;
+      }
+      .card h2 { margin: 0 0 4px; font-size: 1.05rem; font-weight: 800; }
+      .card .sub { color: var(--ink-soft); font-size: 0.92rem; margin: 0 0 16px; }
+      .topic-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+      .topic-btn {
+        appearance: none; border: 1.5px solid var(--line); background: var(--surface-2);
+        border-radius: 14px; padding: 13px 12px; cursor: pointer; text-align: left;
+        font: inherit; color: var(--ink); transition: border-color .15s, background .15s, transform .1s;
+      }
+      .topic-btn:hover { border-color: var(--accent); }
+      .topic-btn:active { transform: scale(0.98); }
+      .topic-btn.selected { border-color: var(--accent); background: var(--accent-soft); }
+      .topic-btn .t-name { display: block; font-weight: 800; font-size: 0.95rem; }
+      .topic-btn .t-count { display: block; color: var(--ink-soft); font-size: 0.8rem; margin-top: 2px; font-weight: 600; }
+      .btn-primary {
+        appearance: none; border: none; cursor: pointer; font: inherit;
+        background: var(--accent); color: #fff; font-weight: 800; font-size: 1.05rem;
+        border-radius: 999px; padding: 15px 38px; width: 100%; margin-top: 22px;
+        transition: background .15s, transform .1s;
+      }
+      .btn-primary:hover { background: var(--accent-dark); }
+      .btn-primary:active { transform: scale(0.985); }
+      .how-list { margin: 14px 0 0; padding: 0; list-style: none; }
+      .how-list li {
+        display: flex; gap: 10px; align-items: flex-start;
+        padding: 7px 0; font-size: 0.95rem; color: var(--ink-soft); line-height: 1.5;
+      }
+      .how-list li svg { color: var(--accent); flex: none; margin-top: 3px; }
+      .how-list li b { color: var(--ink); }
+
+      /* ---------- Quiz screen ---------- */
+      .quiz-head { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+      .timer-ring { position: relative; width: 58px; height: 58px; flex: none; }
+      .timer-ring svg { transform: rotate(-90deg); }
+      .timer-ring .ring-bg { stroke: var(--line); }
+      .timer-ring .ring-fg { stroke: var(--accent); transition: stroke .3s; }
+      .timer-ring.low .ring-fg { stroke: var(--bad); }
+      .timer-num {
+        position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+        font-weight: 800; font-size: 1.05rem; font-variant-numeric: tabular-nums;
+      }
+      .timer-ring.low .timer-num { color: var(--bad); }
+      .head-mid { flex: 1; min-width: 0; }
+      .q-count { font-weight: 800; font-size: 0.98rem; }
+      .q-topic { color: var(--ink-soft); font-size: 0.84rem; font-weight: 600; margin-top: 1px; }
+      .score-chip {
+        background: var(--accent-soft); color: var(--accent-dark); border-radius: 999px;
+        padding: 8px 14px; font-weight: 800; font-size: 0.9rem; white-space: nowrap;
+      }
+      @media (prefers-color-scheme: dark) { .score-chip { color: var(--accent); } }
+      .progress-track { height: 9px; background: var(--line); border-radius: 999px; overflow: hidden; margin-bottom: 20px; }
+      .progress-fill { height: 100%; background: var(--accent); border-radius: 999px; width: 0%; transition: width .45s ease; }
+      .question-card { padding: 26px 24px; margin-top: 0; }
+      .question-text {
+        font-family: "Lora", Georgia, serif; font-size: 1.28rem; font-weight: 600;
+        line-height: 1.45; margin: 0 0 20px;
+      }
+      .options { display: grid; gap: 11px; }
+      .option-btn {
+        appearance: none; font: inherit; text-align: left; cursor: pointer;
+        display: flex; align-items: center; gap: 13px;
+        background: var(--surface-2); border: 1.5px solid var(--line);
+        border-radius: 14px; padding: 14px 15px; color: var(--ink);
+        font-size: 1rem; font-weight: 600; line-height: 1.4;
+        transition: border-color .15s, background .15s, transform .08s;
+      }
+      .option-btn:hover:not(:disabled) { border-color: var(--accent); }
+      .option-btn:active:not(:disabled) { transform: scale(0.99); }
+      .option-btn:disabled { cursor: default; }
+      .opt-letter {
+        flex: none; width: 32px; height: 32px; border-radius: 10px;
+        background: var(--surface); border: 1.5px solid var(--line);
+        display: flex; align-items: center; justify-content: center;
+        font-weight: 800; font-size: 0.9rem; color: var(--ink-soft);
+      }
+      .opt-icon { flex: none; margin-left: auto; display: none; }
+      .option-btn.correct { background: var(--good-soft); border-color: var(--good); }
+      .option-btn.correct .opt-letter { background: var(--good); border-color: var(--good); color: #fff; }
+      .option-btn.correct .opt-icon { display: block; color: var(--good); }
+      .option-btn.wrong { background: var(--bad-soft); border-color: var(--bad); }
+      .option-btn.wrong .opt-letter { background: var(--bad); border-color: var(--bad); color: #fff; }
+      .option-btn.wrong .opt-icon { display: block; color: var(--bad); }
+      .option-btn.dim { opacity: 0.55; }
+      .feedback {
+        margin-top: 18px; border-radius: 14px; padding: 14px 16px;
+        font-size: 0.95rem; line-height: 1.55; display: none;
+      }
+      .feedback.show { display: block; }
+      .feedback.right { background: var(--good-soft); border: 1px solid var(--good); }
+      .feedback.wrong { background: var(--bad-soft); border: 1px solid var(--bad); }
+      .feedback .fb-title { font-weight: 800; font-size: 1.02rem; display: block; margin-bottom: 3px; }
+      .feedback.right .fb-title { color: var(--good); }
+      .feedback.wrong .fb-title { color: var(--bad); }
+      .next-note { text-align: center; color: var(--ink-soft); font-size: 0.84rem; font-weight: 600; margin-top: 14px; }
+
+      /* ---------- Result screen ---------- */
+      .result-hero { text-align: center; padding-top: 8px; }
+      .result-ring { position: relative; width: 168px; height: 168px; margin: 10px auto 6px; }
+      .result-ring svg { transform: rotate(-90deg); }
+      .result-ring .pct {
+        position: absolute; inset: 0; display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+      }
+      .result-ring .pct b { font-size: 2.5rem; font-weight: 800; line-height: 1; }
+      .result-ring .pct span { color: var(--ink-soft); font-size: 0.85rem; font-weight: 700; margin-top: 4px; }
+      .result-hero h2 { font-family: "Lora", Georgia, serif; font-size: 1.7rem; margin: 10px 0 6px; }
+      .result-hero p { color: var(--ink-soft); margin: 0; line-height: 1.6; }
+      .result-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 22px; }
+      .rstat { background: var(--surface-2); border: 1px solid var(--line); border-radius: 14px; padding: 14px 8px; text-align: center; }
+      .rstat b { display: block; font-size: 1.35rem; font-weight: 800; }
+      .rstat span { font-size: 0.8rem; color: var(--ink-soft); font-weight: 700; }
+      .rstat.good b { color: var(--good); }
+      .rstat.bad b { color: var(--bad); }
+      .btn-row { display: flex; gap: 10px; margin-top: 22px; flex-wrap: wrap; }
+      .btn-row .btn-primary { margin-top: 0; flex: 1; min-width: 180px; }
+      .btn-ghost {
+        appearance: none; cursor: pointer; font: inherit; flex: 1; min-width: 150px;
+        background: transparent; border: 1.5px solid var(--line); color: var(--ink);
+        font-weight: 800; font-size: 1rem; border-radius: 999px; padding: 14px 20px;
+      }
+      .btn-ghost:hover { border-color: var(--accent); }
+      .review { margin-top: 26px; }
+      .review h3 { font-size: 1.1rem; margin: 0 0 14px; font-weight: 800; }
+      .review-item { border: 1px solid var(--line); border-radius: 14px; padding: 16px; margin-bottom: 12px; background: var(--surface); }
+      .review-item .rv-top { display: flex; gap: 10px; align-items: flex-start; }
+      .review-item .rv-badge {
+        flex: none; font-size: 0.74rem; font-weight: 800; padding: 4px 10px; border-radius: 999px; margin-top: 2px;
+      }
+      .rv-badge.ok { background: var(--good-soft); color: var(--good); }
+      .rv-badge.no { background: var(--bad-soft); color: var(--bad); }
+      .review-item .rv-q { font-weight: 700; line-height: 1.5; margin: 0; }
+      .review-item .rv-topic { color: var(--ink-soft); font-size: 0.8rem; font-weight: 700; margin-top: 8px; }
+      .review-item .rv-line { font-size: 0.92rem; margin-top: 5px; line-height: 1.5; }
+      .review-item .rv-line b { font-weight: 800; }
+      .review-item .rv-why { color: var(--ink-soft); font-size: 0.9rem; margin-top: 8px; line-height: 1.55; border-top: 1px dashed var(--line); padding-top: 9px; }
+
+      .hidden { display: none !important; }
+      @keyframes pop { 0% { transform: scale(0.96); opacity: 0.4; } 100% { transform: scale(1); opacity: 1; } }
+      .pop { animation: pop 0.25s ease; }
+      @media (prefers-reduced-motion: reduce) {
+        .pop { animation: none; }
+        .progress-fill, .option-btn, .topic-btn { transition: none; }
+      }
+      @media (max-width: 480px) {
+        .card { padding: 19px; }
+        .question-card { padding: 21px 17px; }
+        .question-text { font-size: 1.16rem; }
+        .result-stats { grid-template-columns: repeat(3, 1fr); gap: 7px; }
+        .rstat b { font-size: 1.1rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+
+      <!-- ============ START SCREEN ============ -->
+      <section id="screen-start">
+        <div class="hero">
+          <div class="mark" aria-hidden="true">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7.5-4.9-9.7-9.2C.7 8.6 2.6 5 6.1 5c2 0 3.4 1.1 4.2 2.3h3.4C14.5 6.1 15.9 5 17.9 5c3.5 0 5.4 3.6 3.8 6.8C19.5 16.1 12 21 12 21z" opacity="0"/><path d="M20.8 8.6A5.5 5.5 0 0 0 12 6.7 5.5 5.5 0 0 0 3.2 8.6c0 5 8.8 11.4 8.8 11.4s8.8-6.4 8.8-11.4z"/><path d="M3.5 12h4l1.5-3 3 6 1.5-3h7"/></svg>
+          </div>
+          <h1>Midwifery MCQ Quiz</h1>
+          <p>All midwifery, all mixed together — pregnancy, labour &amp; birth, newborn care, anatomy, reproductive health and everyday midwifery practice. Every run deals you a fresh random 50 from the full question bank, so no two quizzes feel the same.</p>
+          <div class="stat-row">
+            <span class="stat-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.3a2.6 2.6 0 1 1 3.4 2.5c-.8.3-.9 1-.9 1.7"/><circle cx="12" cy="17.2" r="0.4" fill="currentColor"/></svg><span id="chip-total">50 per quiz</span></span>
+            <span class="stat-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>30 seconds each</span>
+            <span class="stat-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4.5 13.5H11L9.8 22 19 10h-6.5L13 2z"/></svg>Instant Right / Wrong</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Choose your topic</h2>
+          <p class="sub">“All Topics Mixed” draws a random 50 questions from the whole bank each run, just like a real exam. Pick a single topic to practise that topic on its own.</p>
+          <div class="topic-grid" id="topic-grid"></div>
+          <button class="btn-primary" id="btn-start" type="button">Start Quiz</button>
+        </div>
+
+        <div class="card">
+          <h2>How it works</h2>
+          <ul class="how-list">
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>Tap an answer</b> — you see Right or Wrong instantly, with the correct answer and a short explanation.</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span><b>No Next button</b> — the next question appears automatically after a few seconds.</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><span><b>Beat the clock</b> — 30 seconds per question. If time runs out, the question is marked wrong.</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.6-6.3"/><path d="M21 3v6h-6"/></svg><span><b>A fresh set every run</b> — 50 questions are picked at random from the bank each time, with question and answer order shuffled.</span></li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg><span><b>Review at the end</b> — check every question again with the correct answers.</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ============ QUIZ SCREEN ============ -->
+      <section id="screen-quiz" class="hidden">
+        <div class="quiz-head">
+          <div class="timer-ring" id="timer-ring" aria-label="Time left for this question">
+            <svg width="58" height="58" viewBox="0 0 58 58">
+              <circle class="ring-bg" cx="29" cy="29" r="25" fill="none" stroke-width="5"/>
+              <circle class="ring-fg" id="ring-fg" cx="29" cy="29" r="25" fill="none" stroke-width="5" stroke-linecap="round" stroke-dasharray="157" stroke-dashoffset="0"/>
+            </svg>
+            <div class="timer-num" id="timer-num">30</div>
+          </div>
+          <div class="head-mid">
+            <div class="q-count" id="q-count">Question 1 of 50</div>
+            <div class="q-topic" id="q-topic">Pregnancy</div>
+          </div>
+          <div class="score-chip">Score: <span id="score-now">0</span></div>
+        </div>
+        <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+
+        <div class="card question-card" id="question-card">
+          <p class="question-text" id="question-text"></p>
+          <div class="options" id="options"></div>
+          <div class="feedback" id="feedback" role="status"></div>
+          <p class="next-note hidden" id="next-note">Next question coming up…</p>
+        </div>
+      </section>
+
+      <!-- ============ RESULT SCREEN ============ -->
+      <section id="screen-result" class="hidden">
+        <div class="card" style="margin-top:6px;">
+          <div class="result-hero">
+            <div class="result-ring">
+              <svg width="168" height="168" viewBox="0 0 168 168">
+                <circle cx="84" cy="84" r="74" fill="none" stroke="var(--line)" stroke-width="11"/>
+                <circle id="result-arc" cx="84" cy="84" r="74" fill="none" stroke="var(--accent)" stroke-width="11" stroke-linecap="round" stroke-dasharray="465" stroke-dashoffset="465"/>
+              </svg>
+              <div class="pct"><b id="result-pct">0%</b><span>YOUR SCORE</span></div>
+            </div>
+            <h2 id="result-title">Well done!</h2>
+            <p id="result-msg"></p>
+            <div class="result-stats">
+              <div class="rstat"><b id="rs-total">0</b><span>Questions</span></div>
+              <div class="rstat good"><b id="rs-correct">0</b><span>Correct</span></div>
+              <div class="rstat bad"><b id="rs-wrong">0</b><span>Wrong</span></div>
+            </div>
+            <div class="btn-row">
+              <button class="btn-primary" id="btn-restart" type="button">↻ Restart Quiz</button>
+              <button class="btn-ghost" id="btn-home" type="button">Change Topic</button>
+            </div>
+          </div>
+        </div>
+        <div class="review">
+          <h3>Review — correct answers</h3>
+          <div id="review-list"></div>
+        </div>
+      </section>
+
+    </main>
+
+    <script>
+      var QUESTIONS = [
+        // ---------- Pregnancy (Antenatal) ----------
+        { topic: "Pregnancy", q: "A woman's last menstrual period (LMP) was 10 January 2026. Using Naegele's rule, her expected date of delivery (EDD) is:", options: ["17 October 2026", "3 October 2026", "17 November 2026", "10 October 2026"], answer: 0, why: "Naegele's rule: LMP + 7 days − 3 months + 1 year. 10 Jan + 7 days = 17 Jan; minus 3 months = 17 October 2026." },
+        { topic: "Pregnancy", q: "Chadwick's sign in early pregnancy refers to:", options: ["Softening of the lower uterine segment", "Bluish discolouration of the cervix and vagina", "Painless uterine contractions", "Darkening of the skin on the face"], answer: 1, why: "Chadwick's sign is the bluish-purple discolouration of the cervix, vagina and vulva caused by increased blood flow in early pregnancy." },
+        { topic: "Pregnancy", q: "At which gestational age is the uterine fundus normally palpable at the level of the umbilicus?", options: ["12 weeks", "16 weeks", "20 weeks", "28 weeks"], answer: 2, why: "The fundus reaches the umbilicus at about 20 weeks, the xiphisternum at about 36 weeks." },
+        { topic: "Pregnancy", q: "Folic acid supplementation before conception and in early pregnancy mainly prevents:", options: ["Gestational diabetes", "Neural tube defects in the baby", "Pre-eclampsia", "Iron deficiency anaemia only"], answer: 1, why: "Folic acid (400 micrograms daily) greatly reduces the risk of neural tube defects such as spina bifida and anencephaly." },
+        { topic: "Pregnancy", q: "According to the WHO antenatal care model, the minimum number of antenatal contacts recommended for a positive pregnancy experience is:", options: ["4 contacts", "6 contacts", "8 contacts", "12 contacts"], answer: 2, why: "WHO (2016) recommends a minimum of 8 antenatal contacts, replacing the older 4-visit focused model." },
+        { topic: "Pregnancy", q: "Which of the following is a DANGER sign in pregnancy that needs immediate referral?", options: ["Mild morning nausea", "Frequent urination", "Vaginal bleeding", "Breast tenderness"], answer: 2, why: "Any vaginal bleeding in pregnancy is a danger sign. Other danger signs include severe headache, blurred vision, fits, severe abdominal pain and reduced fetal movement." },
+        { topic: "Pregnancy", q: "The drug of choice for treating convulsions in eclampsia is:", options: ["Diazepam", "Phenytoin", "Magnesium sulfate", "Hydralazine"], answer: 2, why: "Magnesium sulfate is the drug of choice to prevent and treat eclamptic fits; hydralazine is used to control severe hypertension." },
+        { topic: "Pregnancy", q: "Quickening — the mother's first feeling of fetal movement — is usually felt by a first-time mother (primigravida) at:", options: ["8–10 weeks", "12–14 weeks", "18–20 weeks", "26–28 weeks"], answer: 2, why: "A primigravida usually feels quickening at 18–20 weeks; a multigravida feels it earlier, around 16–18 weeks." },
+
+        // ---------- Labour & Birth ----------
+        { topic: "Labour & Birth", q: "The first stage of labour ends when:", options: ["The baby is born", "The cervix is fully dilated (10 cm)", "The membranes rupture", "The placenta is delivered"], answer: 1, why: "The first stage runs from the onset of regular painful contractions to full dilatation of the cervix (10 cm)." },
+        { topic: "Labour & Birth", q: "The third stage of labour is the period from:", options: ["Full dilatation to birth of the baby", "Onset of labour to full dilatation", "Birth of the baby to expulsion of the placenta", "Expulsion of the placenta to one hour after birth"], answer: 2, why: "The third stage begins with the birth of the baby and ends with the delivery of the placenta and membranes." },
+        { topic: "Labour & Birth", q: "The most common cause of postpartum haemorrhage (PPH) is:", options: ["Retained placenta", "Uterine atony (failure of the uterus to contract)", "Genital tract trauma", "Coagulation disorder"], answer: 1, why: "Uterine atony causes about 70–80% of PPH — remembered in the '4 Ts': Tone, Tissue, Trauma, Thrombin." },
+        { topic: "Labour & Birth", q: "Active management of the third stage of labour (AMTSL) mainly includes:", options: ["Waiting for natural placental separation without drugs", "Giving a uterotonic (oxytocin), controlled cord traction and uterine massage", "Immediate manual removal of the placenta", "Fundal pressure to expel the placenta"], answer: 1, why: "AMTSL with oxytocin 10 IU greatly reduces the risk of postpartum haemorrhage." },
+        { topic: "Labour & Birth", q: "In the active phase of the first stage, the cervix of a woman in normal labour is expected to dilate at least:", options: ["0.2 cm per hour", "0.5 cm per hour", "1 cm per hour", "3 cm per hour"], answer: 2, why: "Progress slower than about 1 cm per hour in the active phase crosses the partograph alert line and needs action/referral." },
+        { topic: "Labour & Birth", q: "The partograph is a tool used to:", options: ["Record the baby's weight after birth", "Monitor and record the progress of labour and maternal/fetal condition", "Calculate the expected date of delivery", "Measure the mother's blood pressure only"], answer: 1, why: "The partograph graphs cervical dilatation, descent, contractions, fetal heart rate and maternal observations so slow progress is detected early." },
+
+        // ---------- Newborn Care ----------
+        { topic: "Newborn Care", q: "The APGAR score of a newborn is normally assessed at:", options: ["Immediately at birth only", "1 minute and 5 minutes after birth", "10 and 20 minutes after birth", "1 hour after birth"], answer: 1, why: "APGAR (Appearance, Pulse, Grimace, Activity, Respiration) is scored at 1 and 5 minutes; a score of 7–10 is reassuring." },
+        { topic: "Newborn Care", q: "Vitamin K is given to the newborn soon after birth to prevent:", options: ["Eye infection", "Haemorrhagic disease of the newborn", "Jaundice", "Hypothermia"], answer: 1, why: "Newborns have low vitamin K stores; a single injection prevents vitamin K deficiency bleeding (haemorrhagic disease of the newborn)." },
+        { topic: "Newborn Care", q: "Colostrum, the first breast milk, is especially rich in:", options: ["Fat and sugar", "Antibodies (IgA) that protect the baby from infection", "Iron", "Vitamin D"], answer: 1, why: "Colostrum is thick, yellowish and packed with antibodies and white cells — it is often called the baby's 'first vaccine'." },
+        { topic: "Newborn Care", q: "A newborn is classified as low birth weight (LBW) if the birth weight is less than:", options: ["3000 g", "2750 g", "2500 g", "2000 g"], answer: 2, why: "Low birth weight is defined as below 2500 g regardless of gestational age; below 1500 g is very low birth weight." },
+        { topic: "Newborn Care", q: "Kangaroo Mother Care (continuous skin-to-skin contact) is most beneficial for:", options: ["Babies with congenital heart disease", "Preterm and low birth weight babies", "Babies of diabetic mothers only", "Babies with jaundice"], answer: 1, why: "Kangaroo Mother Care keeps preterm/LBW babies warm, supports breastfeeding and reduces infection and mortality." },
+        { topic: "Newborn Care", q: "The normal body temperature range of a newborn baby is:", options: ["35.0–36.0 °C", "36.5–37.5 °C", "37.5–38.5 °C", "38.0–39.0 °C"], answer: 1, why: "Normal newborn temperature is 36.5–37.5 °C. Below 36.5 °C is hypothermia, a common and dangerous problem in newborns." },
+
+        // ---------- Anatomy & Physiology ----------
+        { topic: "Anatomy & Physiology", q: "The normal umbilical cord contains:", options: ["One artery and one vein", "Two arteries and one vein", "Two arteries and two veins", "One artery and two veins"], answer: 1, why: "The cord has two umbilical arteries (carrying blood to the placenta) and one umbilical vein (carrying oxygenated blood to the fetus)." },
+        { topic: "Anatomy & Physiology", q: "Which hormone is mainly responsible for maintaining pregnancy and keeping the uterus quiet?", options: ["Oxytocin", "Oestrogen", "Progesterone", "Prolactin"], answer: 2, why: "Progesterone — first from the corpus luteum, then the placenta — maintains the endometrium and prevents uterine contractions." },
+        { topic: "Anatomy & Physiology", q: "Oxytocin is released into the blood from the:", options: ["Anterior pituitary gland", "Posterior pituitary gland", "Placenta", "Adrenal gland"], answer: 1, why: "Oxytocin is made in the hypothalamus and released from the posterior pituitary; it causes uterine contractions and milk ejection." },
+        { topic: "Anatomy & Physiology", q: "Which type of female pelvis is most favourable for normal vaginal delivery?", options: ["Android", "Anthropoid", "Platypelloid", "Gynaecoid"], answer: 3, why: "The gynaecoid pelvis — rounded brim, adequate diameters — is the typical female pelvis and best suited for childbirth." },
+        { topic: "Anatomy & Physiology", q: "The fertilised ovum normally implants in the:", options: ["Fallopian tube", "Endometrium of the uterus", "Cervix", "Ovary"], answer: 1, why: "Implantation normally occurs in the endometrium of the upper uterine segment about 6–7 days after fertilisation." },
+
+        // ---------- Reproductive Health ----------
+        { topic: "Reproductive Health", q: "The Lactational Amenorrhoea Method (LAM) can be used as contraception for up to:", options: ["3 months after delivery", "6 months after delivery", "1 year after delivery", "Until the baby is weaned"], answer: 1, why: "LAM is effective for 6 months if the mother is fully breastfeeding and her periods have not returned." },
+        { topic: "Reproductive Health", q: "Which contraceptive method also protects against sexually transmitted infections (STIs)?", options: ["Oral contraceptive pill", "IUCD (copper T)", "Condom", "Injectable contraceptive"], answer: 2, why: "Condoms are the only method that both prevent pregnancy and protect against STIs, including HIV." },
+        { topic: "Reproductive Health", q: "Emergency contraceptive pills (levonorgestrel) are most effective when taken within:", options: ["12 hours of unprotected sex", "72 hours of unprotected sex", "7 days of unprotected sex", "Only before the next period"], answer: 1, why: "Levonorgestrel emergency pills should be taken as soon as possible, within 72 hours; effectiveness falls with time." },
+        { topic: "Reproductive Health", q: "Which of the following is a permanent method of contraception for a woman?", options: ["Implant", "Tubal ligation", "Intrauterine device", "Injectable"], answer: 1, why: "Tubal ligation (blocking/cutting the fallopian tubes) is a permanent female method; vasectomy is the permanent male method." },
+
+        // ---------- Midwifery Practice ----------
+        { topic: "Midwifery Practice", q: "The single most effective action to prevent infection during labour and delivery care is:", options: ["Wearing a mask", "Proper hand hygiene (hand washing)", "Using antibiotics for every mother", "Wearing sterile gloves for all tasks"], answer: 1, why: "Hand hygiene is the single most important infection-prevention practice in midwifery and all health care." },
+        { topic: "Midwifery Practice", q: "A midwife should refer a woman in labour to a higher facility IMMEDIATELY if there is:", options: ["Mild backache in early labour", "Obstructed labour / no progress with strong contractions", "A show at the start of labour", "Membranes rupturing at term"], answer: 1, why: "Obstructed labour can cause uterine rupture, fistula and fetal death — it needs urgent referral for operative delivery." },
+        { topic: "Midwifery Practice", q: "During the postnatal period, the midwife checks the fundus to ensure involution. By about 10–14 days after birth, the uterus should:", options: ["Still be felt at the umbilicus", "No longer be palpable abdominally (back in the pelvis)", "Be larger than at delivery", "Reach the xiphisternum"], answer: 1, why: "The fundus descends about 1 cm per day and by 10–14 days has returned into the pelvis and is no longer felt abdominally." },
+
+        // ---------- Extra questions (bank built up to 50) ----------
+        { topic: "Pregnancy", q: "Hegar's sign, an early sign of pregnancy, is:", options: ["Softening of the lower uterine segment (isthmus)", "Bluish discolouration of the vagina", "Audible fetal heart sounds", "Palpation of fetal parts"], answer: 0, why: "Hegar's sign is the softening and compressibility of the lower uterine segment, felt on bimanual examination at about 6–8 weeks." },
+        { topic: "Pregnancy", q: "Screening for gestational diabetes mellitus (GDM) with an oral glucose tolerance test is usually performed at:", options: ["8–10 weeks", "14–16 weeks", "24–28 weeks", "34–36 weeks"], answer: 2, why: "GDM screening is routinely done at 24–28 weeks, when insulin resistance from placental hormones is highest." },
+        { topic: "Pregnancy", q: "Painless, bright-red vaginal bleeding in the later months of pregnancy is the classic sign of:", options: ["Placenta praevia", "Abruptio placentae", "Threatened abortion", "Cervicitis"], answer: 0, why: "Placenta praevia (placenta over/near the cervix) causes painless bright-red bleeding; abruptio placentae usually causes painful bleeding with a tense uterus." },
+        { topic: "Pregnancy", q: "The average recommended total weight gain in pregnancy for a woman with a normal BMI is about:", options: ["4–6 kg", "11.5–16 kg", "20–22 kg", "25–30 kg"], answer: 1, why: "For a normal BMI (18.5–24.9), recommended total gain is 11.5–16 kg; too little or too much gain increases risks for mother and baby." },
+        { topic: "Labour & Birth", q: "The normal baseline fetal heart rate during labour is:", options: ["80–100 beats per minute", "110–160 beats per minute", "170–190 beats per minute", "60–80 beats per minute"], answer: 1, why: "A baseline fetal heart rate of 110–160 bpm is normal; persistent rates outside this range need evaluation." },
+        { topic: "Labour & Birth", q: "Which of the following is a sign that the placenta has separated in the third stage?", options: ["The uterus becomes soft and flat", "A gush of blood with lengthening of the umbilical cord", "The mother's blood pressure falls sharply", "Uterine contractions stop completely"], answer: 1, why: "Signs of placental separation: the uterus rises and becomes firm and globular, there is a gush of blood, and the cord lengthens." },
+        { topic: "Labour & Birth", q: "The type of episiotomy most commonly performed is:", options: ["Median (midline)", "Mediolateral", "Lateral", "J-shaped"], answer: 1, why: "A mediolateral episiotomy is most commonly used because it is less likely to extend into the anal sphincter than a midline cut." },
+        { topic: "Newborn Care", q: "Immediately after birth, a baby who does not cry should FIRST be:", options: ["Given oxygen by mask", "Dried thoroughly and given tactile stimulation", "Suctioned deeply through the mouth and nose", "Placed under cold water"], answer: 1, why: "Drying and rubbing the back (tactile stimulation) is the first step of newborn resuscitation; most babies respond to this alone." },
+        { topic: "Newborn Care", q: "Antibiotic eye ointment is applied to the newborn's eyes soon after birth to prevent:", options: ["Cataract", "Ophthalmia neonatorum (severe eye infection)", "Squint", "Blocked tear duct"], answer: 1, why: "Eye prophylaxis protects against gonococcal/chlamydial infection picked up during birth, which can cause blindness." },
+        { topic: "Newborn Care", q: "Which vaccine is routinely given to a baby at birth?", options: ["Measles", "BCG (against tuberculosis)", "Pentavalent (DPT-HepB-Hib) first dose", "Rotavirus"], answer: 1, why: "BCG is given at birth (along with OPV-0 and hepatitis B birth dose in many schedules); pentavalent starts at 6 weeks." },
+        { topic: "Anatomy & Physiology", q: "The normal volume of amniotic fluid at term is approximately:", options: ["About 300 mL", "About 800–1000 mL", "About 2500 mL", "About 4000 mL"], answer: 1, why: "Amniotic fluid at term is roughly 800–1000 mL; more than 2000 mL is polyhydramnios and less than 500 mL is oligohydramnios." },
+        { topic: "Anatomy & Physiology", q: "The hormone responsible for milk PRODUCTION in the breast is:", options: ["Oxytocin", "Oestrogen", "Prolactin", "Progesterone"], answer: 2, why: "Prolactin from the anterior pituitary produces milk; oxytocin causes milk ejection (the 'let-down' reflex)." },
+        { topic: "Anatomy & Physiology", q: "In a regular 28-day menstrual cycle, ovulation usually occurs around:", options: ["Day 5", "Day 14", "Day 21", "Day 28"], answer: 1, why: "Ovulation occurs about 14 days before the next period — around day 14 of a 28-day cycle." },
+        { topic: "Reproductive Health", q: "A Copper-T 380A intrauterine device (IUCD) can effectively prevent pregnancy for up to:", options: ["3 years", "5 years", "10 years", "1 year"], answer: 2, why: "The CuT-380A is approved for 10 years of use and is one of the most effective reversible methods." },
+        { topic: "Reproductive Health", q: "Which is the MOST effective long-acting reversible contraceptive method?", options: ["Male condom", "Subdermal implant", "Oral contraceptive pill", "Monthly injectable"], answer: 1, why: "The implant is over 99.9% effective — more effective than pills, condoms or injectables because it does not depend on user action." },
+        { topic: "Reproductive Health", q: "The permanent method of contraception for a man is:", options: ["IUCD", "Vasectomy", "Tubal ligation", "Implant"], answer: 1, why: "Vasectomy (cutting/blocking the vas deferens) is the permanent male method; tubal ligation is the female equivalent." },
+        { topic: "Midwifery Practice", q: "Which postnatal finding requires URGENT referral of the mother?", options: ["Mild afterpains on day 1", "Red lochia on day 2", "Temperature of 39 °C with foul-smelling lochia", "Breast fullness on day 3"], answer: 2, why: "High fever with foul-smelling discharge suggests puerperal sepsis, a life-threatening infection needing urgent hospital care." },
+        { topic: "Midwifery Practice", q: "Before performing a vaginal examination, the midwife should always:", options: ["Ask a relative to leave the facility", "Explain the procedure and obtain the woman's consent", "Give a sedative first", "Wait until labour is over"], answer: 1, why: "Respectful maternity care: every examination needs explanation, privacy and informed consent from the woman." },
+        { topic: "Pregnancy", q: "Goodell's sign in early pregnancy is:", options: ["Softening of the cervix", "Bluish colour of the vagina", "Pulsations in the lateral fornix", "Enlargement of the abdomen"], answer: 0, why: "Goodell's sign is softening of the cervix due to increased vascularity, felt from about 6 weeks." },
+        { topic: "Pregnancy", q: "Osiander's sign refers to:", options: ["Fetal heart heard by Doppler", "Increased pulsation in the lateral vaginal fornix", "Softening of the isthmus", "Visible fetal movements"], answer: 1, why: "Osiander's sign is increased pulsation felt in the lateral fornix from the enlarged uterine vessels in early pregnancy." },
+        { topic: "Pregnancy", q: "The hormone tested in a urine pregnancy test is:", options: ["Progesterone", "hCG (human chorionic gonadotropin)", "Prolactin", "Relaxin"], answer: 1, why: "Pregnancy tests detect hCG produced by the trophoblast after implantation." },
+        { topic: "Pregnancy", q: "hCG levels in a normal early pregnancy roughly double every:", options: ["12 hours", "48 hours", "7 days", "14 days"], answer: 1, why: "In a healthy early pregnancy hCG doubles about every 48 hours; a slower rise raises concern for ectopic pregnancy." },
+        { topic: "Pregnancy", q: "The average duration of a normal human pregnancy from LMP is:", options: ["36 weeks", "38 weeks", "40 weeks", "42 weeks"], answer: 2, why: "Pregnancy lasts about 280 days or 40 weeks from the first day of the last menstrual period." },
+        { topic: "Pregnancy", q: "A pregnancy lasting beyond 42 completed weeks is called:", options: ["Preterm", "Post-term (postmature)", "Prolonged labour", "Term pregnancy"], answer: 1, why: "Post-term pregnancy is 42 weeks or more; preterm is before 37 weeks and term is 37 to 42 weeks." },
+        { topic: "Pregnancy", q: "At 12 weeks of gestation the fundus is usually palpable:", options: ["At the umbilicus", "Just above the symphysis pubis", "At the xiphisternum", "Halfway to the umbilicus only at 20 weeks"], answer: 1, why: "The uterus rises out of the pelvis and becomes palpable just above the symphysis pubis at about 12 weeks." },
+        { topic: "Pregnancy", q: "McDonald's rule is used to estimate:", options: ["Fetal weight from head circumference", "Gestational age from symphysis-fundal height", "EDD from quickening", "Blood loss after delivery"], answer: 1, why: "After 20 weeks, fundal height in centimetres roughly equals gestational age in weeks." },
+        { topic: "Pregnancy", q: "Linea nigra in pregnancy is:", options: ["A danger sign of bleeding", "Dark pigmented line on the midline of the abdomen", "Stretch marks on the thighs", "A sign of anaemia"], answer: 1, why: "Linea nigra is normal darkening of the linea alba from melanocyte-stimulating hormone in pregnancy." },
+        { topic: "Pregnancy", q: "Striae gravidarum are commonly known as:", options: ["Spider veins", "Stretch marks", "Skin tags", "Varicose veins"], answer: 1, why: "Striae gravidarum are pink-purple stretch marks on the abdomen, breasts and thighs from stretching and hormonal changes." },
+        { topic: "Pregnancy", q: "Which vitamin deficiency in the mother is linked to anaemia and poor wound healing and is supplemented along with iron in many antenatal programmes?", options: ["Vitamin C only", "Folic acid and iron are the routine supplements", "Vitamin K", "Vitamin B12 only in vegans"], answer: 1, why: "Iron and folic acid are routinely supplemented in pregnancy to prevent anaemia and neural tube defects." },
+        { topic: "Pregnancy", q: "The normal haemoglobin level below which a pregnant woman is diagnosed anaemic (WHO, first trimester) is:", options: ["13 g/dL", "12 g/dL", "11 g/dL", "9 g/dL"], answer: 2, why: "WHO defines anaemia in pregnancy as haemoglobin below 11 g/dL in the first and third trimesters." },
+        { topic: "Pregnancy", q: "Physiological anaemia of pregnancy occurs mainly because:", options: ["Blood loss", "Plasma volume increases more than red cell mass", "Iron is not absorbed at all", "The spleen destroys red cells"], answer: 1, why: "Plasma volume rises about 50% while red cell mass rises about 25%, diluting haemoglobin concentration." },
+        { topic: "Pregnancy", q: "Pre-eclampsia is classically defined by:", options: ["Fever and headache", "Hypertension with proteinuria after 20 weeks", "Bleeding and pain", "Oedema alone in the legs"], answer: 1, why: "Pre-eclampsia is blood pressure 140/90 or more with proteinuria or organ features arising after 20 weeks." },
+        { topic: "Pregnancy", q: "Which symptom in a woman with high blood pressure in pregnancy is a warning sign of impending eclampsia?", options: ["Mild ankle swelling", "Severe headache with blurred vision and epigastric pain", "Heartburn after meals", "Backache"], answer: 1, why: "Severe headache, visual disturbance and epigastric pain signal cerebral and liver involvement and may precede a fit." },
+        { topic: "Pregnancy", q: "The first drug used to lower very high blood pressure (160/110) in pregnancy in many protocols is:", options: ["Methyldopa for acute control", "Labetalol, hydralazine or oral nifedipine", "Furosemide", "Atenolol"], answer: 1, why: "Acute severe hypertension is treated with labetalol, hydralazine or nifedipine; methyldopa acts too slowly for emergencies." },
+        { topic: "Pregnancy", q: "HELLP syndrome includes:", options: ["Haemolysis, elevated liver enzymes, low platelets", "High fever, leucocytosis, pain", "Hypotension, oedema, protein loss", "Headache, epilepsy, low pressure"], answer: 0, why: "HELLP = Haemolysis, Elevated Liver enzymes and Low Platelets, a severe form of pre-eclampsia." },
+        { topic: "Pregnancy", q: "Abruptio placentae classically presents with:", options: ["Painless bright bleeding", "Painful bleeding with a tense, tender uterus", "Itching all over the body", "Foul-smelling discharge"], answer: 1, why: "In abruption the placenta separates early, causing painful bleeding and a woody-hard, tender uterus; bleeding may be concealed." },
+        { topic: "Pregnancy", q: "In placenta praevia, vaginal examination should be:", options: ["Done immediately to grade it", "Avoided until praevia is excluded by ultrasound", "Done in every antenatal visit", "Replaced by a rectal examination"], answer: 1, why: "A digital vaginal examination can provoke massive bleeding in placenta praevia; diagnosis is by ultrasound." },
+        { topic: "Pregnancy", q: "A pregnant woman at 30 weeks reports the baby is moving much less than usual. The midwife should:", options: ["Reassure and review in one month", "Assess fetal well-being the same day and refer if reduced movement persists", "Advise her to drink alcohol to relax", "Wait until the next routine visit"], answer: 1, why: "Reduced fetal movement can signal fetal compromise and needs same-day assessment including fetal heart monitoring." },
+        { topic: "Pregnancy", q: "The recommended daily iron-folic acid supplementation in pregnancy in many national programmes is for at least:", options: ["30 days", "100 to 180 days", "Only the first month", "Only after delivery"], answer: 1, why: "Programmes commonly advise iron-folic acid daily through pregnancy, often 180 days, continuing into the postnatal period." },
+        { topic: "Pregnancy", q: "Which vaccine is routinely recommended in pregnancy in many schedules to protect the newborn from tetanus?", options: ["BCG", "Tetanus toxoid / Td", "Measles", "Yellow fever for all women"], answer: 1, why: "Tetanus toxoid (Td) in pregnancy protects mother and newborn against tetanus." },
+        { topic: "Pregnancy", q: "Live vaccines generally AVOIDED in pregnancy include:", options: ["Tetanus toxoid", "MMR (measles, mumps, rubella)", "Inactivated influenza", "Hepatitis B"], answer: 1, why: "Live vaccines such as MMR are avoided in pregnancy because of theoretical risk to the fetus." },
+        { topic: "Pregnancy", q: "Hyperemesis gravidarum differs from normal morning sickness because it causes:", options: ["Weight gain", "Dehydration, weight loss and ketonuria", "High blood pressure", "Oedema of the face"], answer: 1, why: "Hyperemesis is severe vomiting with dehydration, electrolyte imbalance, ketones in urine and weight loss needing treatment." },
+        { topic: "Pregnancy", q: "The most common site of ectopic pregnancy is the:", options: ["Ovary", "Fallopian tube", "Cervix", "Abdominal cavity"], answer: 1, why: "Over 90% of ectopic pregnancies implant in the fallopian tube, most often the ampullary part." },
+        { topic: "Pregnancy", q: "A classic triad of ectopic pregnancy is:", options: ["Fever, discharge, pain", "Missed period, abdominal pain, vaginal bleeding", "Headache, oedema, proteinuria", "Vomiting, diarrhoea, fever"], answer: 1, why: "Amenorrhoea, abdominal pain and abnormal vaginal bleeding should always raise suspicion of ectopic pregnancy." },
+        { topic: "Pregnancy", q: "A hydatidiform mole (molar pregnancy) typically shows:", options: ["A very small uterus for dates", "A uterus larger than dates with no fetal heart and very high hCG", "Normal hCG levels", "A single live fetus"], answer: 1, why: "Molar pregnancy causes excessive hCG, a large-for-dates uterus, bleeding and grape-like vesicles, with no fetus in a complete mole." },
+        { topic: "Pregnancy", q: "Polyhydramnios is defined as amniotic fluid volume more than:", options: ["1000 mL", "1500 mL", "2000 mL", "3000 mL"], answer: 2, why: "Fluid above about 2000 mL is polyhydramnios; it is linked to diabetes, fetal anomalies and multiple pregnancy." },
+        { topic: "Pregnancy", q: "Oligohydramnios is most commonly associated with:", options: ["Maternal diabetes", "Prolonged rupture of membranes and poor fetal kidney function", "Post-term pregnancy only in twins", "Excess fetal swallowing"], answer: 1, why: "Too little fluid results from leaking membranes, placental insufficiency or fetal urinary tract problems." },
+        { topic: "Pregnancy", q: "Intrauterine growth restriction (IUGR) means the fetus:", options: ["Is larger than normal", "Fails to reach its growth potential, often below the 10th centile", "Is always born before 32 weeks", "Has excess amniotic fluid"], answer: 1, why: "A growth-restricted fetus is smaller than expected for gestation, usually due to placental insufficiency or maternal disease." },
+        { topic: "Pregnancy", q: "Which infection in pregnancy can cause congenital deafness, cataract and heart defects in the baby?", options: ["Rubella", "Influenza", "Common cold", "Urinary tract infection"], answer: 0, why: "Rubella in the first trimester causes congenital rubella syndrome: deafness, cataracts and cardiac defects." },
+        { topic: "Pregnancy", q: "A pregnant woman who is Rh-negative with an Rh-positive partner needs anti-D immunoglobulin to prevent:", options: ["Anaemia in herself", "Haemolytic disease of the fetus and newborn in future pregnancies", "Pre-eclampsia", "Gestational diabetes"], answer: 1, why: "Anti-D prevents the mother forming antibodies that would attack Rh-positive fetal red cells in later pregnancies." },
+        { topic: "Pregnancy", q: "Anti-D immunoglobulin after delivery should ideally be given within:", options: ["7 days", "72 hours", "28 days", "6 weeks"], answer: 1, why: "Anti-D is given within 72 hours of a sensitising event such as delivery, bleeding or abortion." },
+        { topic: "Pregnancy", q: "The nuchal translucency scan for Down syndrome screening is performed at:", options: ["6 to 8 weeks", "11 to 13+6 weeks", "18 to 20 weeks", "28 to 30 weeks"], answer: 1, why: "Nuchal translucency is measured at 11 to 13+6 weeks; the anomaly scan is later at 18 to 20 weeks." },
+        { topic: "Pregnancy", q: "The routine anomaly (level II) ultrasound scan is usually done at:", options: ["12 weeks", "18 to 20 weeks", "28 weeks", "36 weeks"], answer: 1, why: "The 18 to 20 week scan checks fetal anatomy, growth, placenta position and amniotic fluid." },
+        { topic: "Pregnancy", q: "Braxton Hicks contractions are:", options: ["A sign of preterm labour", "Irregular, painless practice contractions", "Always associated with bleeding", "A sign the placenta has separated"], answer: 1, why: "Braxton Hicks are irregular, usually painless contractions that do not dilate the cervix." },
+        { topic: "Pregnancy", q: "Lightening in late pregnancy means:", options: ["The mother loses weight rapidly", "The fetal head descends into the pelvis, easing breathing", "The skin colour becomes pale", "Blood pressure falls suddenly"], answer: 1, why: "Lightening is descent of the presenting part into the pelvis, usually 2 to 3 weeks before labour in a first pregnancy." },
+        { topic: "Pregnancy", q: "A 'show' before labour is:", options: ["Bright red heavy bleeding", "Blood-stained mucus discharge as the cervix begins to change", "Passage of the whole placenta", "Rupture of membranes"], answer: 1, why: "The show is the cervical mucus plug, slightly blood-stained, passed as the cervix softens and shortens." },
+        { topic: "Pregnancy", q: "Urinary tract infection in pregnancy must be treated promptly because untreated it can lead to:", options: ["Diabetes", "Pyelonephritis and preterm labour", "Post-term pregnancy", "Placenta praevia"], answer: 1, why: "Ascending infection can cause kidney infection, sepsis and premature contractions." },
+        { topic: "Pregnancy", q: "The safest simple advice for constipation in pregnancy is:", options: ["Strong laxatives daily", "More fibre, fluids and regular activity", "Stop iron tablets permanently without advice", "Eat less food"], answer: 1, why: "Dietary fibre, adequate water and walking relieve most pregnancy constipation safely." },
+        { topic: "Pregnancy", q: "Pica in pregnancy refers to:", options: ["Craving and eating non-food items such as clay or raw rice", "Loss of appetite", "Excessive salivation", "Heartburn at night"], answer: 0, why: "Pica is craving non-food substances and is often linked with iron deficiency anaemia." },
+        { topic: "Pregnancy", q: "Which position is advised for a pregnant woman to sleep and rest in late pregnancy to avoid vena cava compression?", options: ["Flat on her back for long periods", "On her side, preferably the left side", "Sitting upright all night", "On her stomach"], answer: 1, why: "Lying on the side avoids supine hypotension from the uterus pressing on the inferior vena cava." },
+        { topic: "Pregnancy", q: "Supine hypotensive syndrome in pregnancy is caused by:", options: ["Low blood sugar", "Compression of the inferior vena cava by the gravid uterus", "Anaemia", "Dehydration"], answer: 1, why: "The heavy uterus compresses the vena cava when the woman lies flat, reducing venous return and blood pressure." },
+        { topic: "Pregnancy", q: "The main purpose of birth preparedness and complication readiness (BPCR) counselling is to:", options: ["Guarantee a home delivery", "Plan transport, money, blood donor and facility in advance for emergencies", "Avoid all hospital visits", "Decide the baby's name"], answer: 1, why: "BPCR reduces delays in reaching care by planning place of birth, transport, funds and emergency contacts." },
+        { topic: "Pregnancy", q: "Twin pregnancy is most reliably diagnosed by:", options: ["Fundal height alone", "Ultrasound scan", "Feeling two heads on palpation only", "Mother's weight gain"], answer: 1, why: "Ultrasound confirms the number of fetuses, chorionicity and growth far more reliably than palpation." },
+        { topic: "Pregnancy", q: "A woman in pregnancy should seek care immediately for leaking fluid per vaginam before term because it may indicate:", options: ["Normal discharge", "Preterm prelabour rupture of membranes with infection risk", "Urinary incontinence always", "The start of menopause"], answer: 1, why: "Preterm rupture of membranes risks cord prolapse, infection and preterm birth and needs prompt assessment." },
+        { topic: "Pregnancy", q: "The normal range of fetal heart rate heard at an antenatal visit is:", options: ["80 to 100 bpm", "110 to 160 bpm", "170 to 200 bpm", "60 to 90 bpm"], answer: 1, why: "A fetal heart rate of 110 to 160 beats per minute is reassuring at antenatal checks." },
+        { topic: "Pregnancy", q: "At each antenatal visit the midwife routinely checks:", options: ["Only the mother's weight", "Blood pressure, urine, fundal height, fetal heart and danger signs", "Only the baby's position at 12 weeks", "Blood group every visit"], answer: 1, why: "Routine antenatal assessment covers BP, urine for protein and sugar, growth, fetal heart and any danger signs." },
+        { topic: "Labour & Birth", q: "The latent phase of the first stage of labour is when the cervix dilates up to about:", options: ["2 cm", "4 cm", "6 cm", "10 cm"], answer: 1, why: "The latent phase covers effacement and dilatation to about 4 cm; the active phase follows with faster dilatation." },
+        { topic: "Labour & Birth", q: "True labour pain differs from false labour pain because true labour:", options: ["Stops with rest and walking", "Comes at regular intervals, increases in strength and dilates the cervix", "Is felt only in the back", "Never has a show"], answer: 1, why: "True labour contractions are regular, progressively stronger and longer, and cause cervical change." },
+        { topic: "Labour & Birth", q: "Effacement of the cervix means:", options: ["The cervix opens to 10 cm", "The cervix shortens and thins as it is taken up into the lower segment", "The cervix becomes hard", "The membranes rupture"], answer: 1, why: "Effacement is thinning and shortening of the cervix, usually completed before full dilatation in a first labour." },
+        { topic: "Labour & Birth", q: "The second stage of labour ends with:", options: ["Full dilatation", "Birth of the baby", "Delivery of the placenta", "One hour after birth"], answer: 1, why: "The second stage runs from full dilatation of the cervix to the birth of the baby." },
+        { topic: "Labour & Birth", q: "The fourth stage of labour refers to:", options: ["The hour after placental delivery when the mother is closely observed", "The latent phase", "The period of cervical dilatation", "The baby's first feed"], answer: 0, why: "The fourth stage is the first hour (some say two hours) after the placenta, when bleeding and vital signs are watched closely." },
+        { topic: "Labour & Birth", q: "Station of the fetal head describes:", options: ["The position of the occiput", "The level of the presenting part in relation to the ischial spines", "The size of the head", "The degree of flexion"], answer: 1, why: "Station is measured in centimetres above or below the ischial spines; zero station means the head is at the spines." },
+        { topic: "Labour & Birth", q: "The denominator in a vertex presentation is the:", options: ["Sacrum", "Occiput", "Mentum", "Acromion"], answer: 1, why: "The occiput is the denominator (reference point) used to describe position in vertex presentations." },
+        { topic: "Labour & Birth", q: "A left occipito-anterior (LOA) position means:", options: ["The occiput is under the symphysis", "The occiput points to the left front of the mother's pelvis", "The baby is breech", "The head is not engaged"], answer: 1, why: "LOA is the commonest and most favourable position: occiput towards the left acetabulum." },
+        { topic: "Labour & Birth", q: "Engagement of the fetal head means:", options: ["The head is visible at the vulva", "The widest diameter of the head has passed through the pelvic brim", "The head is floating", "Contractions have started"], answer: 1, why: "Engagement occurs when the biparietal diameter passes the pelvic inlet; in a first pregnancy it often happens before labour." },
+        { topic: "Labour & Birth", q: "The cardinal movement that allows the head to pass under the symphysis pubis at birth is:", options: ["Flexion", "Extension", "Internal rotation", "Descent"], answer: 1, why: "After flexion, descent and internal rotation, the head extends to be born under the pubic arch." },
+        { topic: "Labour & Birth", q: "Moulding of the fetal head is:", options: ["A sign of head injury", "Overlapping of skull bones that reduces head diameter during labour", "Swelling of the scalp only", "A cephalohaematoma"], answer: 1, why: "Moulding is the normal overlapping of the flexible skull bones as the head adapts to the birth canal." },
+        { topic: "Labour & Birth", q: "Caput succedaneum is:", options: ["Bleeding under the periosteum limited to one bone", "Soft swelling of the scalp that crosses suture lines and resolves in days", "A fracture of the skull", "Infection of the scalp"], answer: 1, why: "Caput is oedema of the presenting scalp; unlike cephalohaematoma it crosses sutures and disappears quickly." },
+        { topic: "Labour & Birth", q: "How often should the fetal heart be listened to in the active first stage of normal labour?", options: ["Once at admission only", "Every 15 to 30 minutes", "Only after delivery", "Every 4 hours"], answer: 1, why: "Intermittent auscultation every 15 to 30 minutes in the first stage detects fetal distress early." },
+        { topic: "Labour & Birth", q: "Meconium-stained liquor in labour suggests:", options: ["The baby is always dead", "Possible fetal stress; closer fetal monitoring is needed", "The mother has an infection only", "Nothing of importance"], answer: 1, why: "Thick meconium can indicate fetal compromise and a risk of meconium aspiration at birth." },
+        { topic: "Labour & Birth", q: "A cord prolapse is an emergency because:", options: ["The cord may be compressed, cutting off oxygen to the baby", "It causes maternal bleeding", "It delays the placenta only", "It is painful for the mother"], answer: 0, why: "In cord prolapse the cord is compressed between the presenting part and pelvis; immediate action and urgent delivery are needed." },
+        { topic: "Labour & Birth", q: "The FIRST action when a cord prolapse is found with a live baby is to:", options: ["Push the cord back inside", "Lift the presenting part off the cord, keep the hand in place, call for help and prepare for urgent delivery", "Break the membranes", "Give oxytocin to speed labour"], answer: 1, why: "Relieving cord compression, often in knee-chest position, while arranging emergency caesarean delivery saves the baby." },
+        { topic: "Labour & Birth", q: "Shoulder dystocia occurs when:", options: ["The head is too large", "The baby's shoulder gets stuck behind the symphysis pubis after the head is born", "The placenta does not separate", "The cord is short"], answer: 1, why: "Shoulder dystocia is an emergency; the McRoberts position and suprapubic pressure are first-line manoeuvres." },
+        { topic: "Labour & Birth", q: "The McRoberts manoeuvre for shoulder dystocia involves:", options: ["Pressing hard on the fundus", "Flexing the mother's thighs sharply onto her abdomen", "Pulling strongly on the baby's head", "Giving a sedative"], answer: 1, why: "Sharp hip flexion widens the pelvic outlet and, with suprapubic pressure, frees most stuck shoulders. Fundal pressure is avoided." },
+        { topic: "Labour & Birth", q: "Normal blood loss at a vaginal delivery is considered up to:", options: ["100 mL", "300 mL", "500 mL", "1000 mL"], answer: 2, why: "Postpartum haemorrhage is defined as blood loss of 500 mL or more after vaginal birth (1000 mL after caesarean)." },
+        { topic: "Labour & Birth", q: "The FIRST step in managing atonic postpartum haemorrhage is to:", options: ["Prepare for hysterectomy at once", "Rub up a contraction (uterine massage), empty the bladder and give oxytocin", "Give oral iron", "Wait and observe for one hour"], answer: 1, why: "For an atonic uterus: massage, oxytocin, empty bladder, then look for other causes while calling for help." },
+        { topic: "Labour & Birth", q: "Ergometrine differs from oxytocin because ergometrine:", options: ["Is safer in hypertension", "Causes a sustained tetanic contraction and must be avoided in hypertension and pre-eclampsia", "Is given only orally", "Has no side effects"], answer: 1, why: "Ergometrine raises blood pressure, so it is contraindicated in hypertensive disorders of pregnancy." },
+        { topic: "Labour & Birth", q: "Misoprostol is used in obstetrics mainly to:", options: ["Stop all contractions permanently", "Prevent and treat postpartum haemorrhage where oxytocin storage is difficult", "Treat infection", "Mature the fetal lungs"], answer: 1, why: "Heat-stable misoprostol is a uterotonic option for PPH prevention and treatment, especially without a cold chain." },
+        { topic: "Labour & Birth", q: "A retained placenta is diagnosed when the placenta is not delivered within:", options: ["5 minutes", "30 minutes of the baby's birth with active management", "2 hours in all cases", "24 hours"], answer: 1, why: "With active management, failure to deliver the placenta within about 30 minutes is retained placenta needing intervention." },
+        { topic: "Labour & Birth", q: "Before controlled cord traction, the midwife must confirm:", options: ["The mother is asleep", "The uterus is contracted and signs of placental separation are present", "The bladder is full", "Another contraction is absent"], answer: 1, why: "Pulling the cord on an uncontracted uterus risks uterine inversion and cord snapping." },
+        { topic: "Labour & Birth", q: "After delivery of the placenta, it must be examined to check that:", options: ["It is red in colour", "It is complete, with no missing cotyledons or membranes and a normal cord insertion", "It weighs exactly 500 g", "It has no blood vessels"], answer: 1, why: "A missing lobe or ragged membranes can cause secondary PPH and infection, so completeness is always checked." },
+        { topic: "Labour & Birth", q: "A second-degree perineal tear involves:", options: ["Skin only", "Perineal skin and muscles but not the anal sphincter", "The anal sphincter", "The rectal mucosa"], answer: 1, why: "First degree: skin; second: muscles; third: sphincter; fourth: sphincter plus rectal mucosa." },
+        { topic: "Labour & Birth", q: "Induction of labour means:", options: ["Speeding up an established labour", "Artificially starting labour before it begins spontaneously", "Delivering by caesarean section", "Breaking the membranes in the second stage"], answer: 1, why: "Induction starts labour artificially; augmentation strengthens contractions in a labour that has already started." },
+        { topic: "Labour & Birth", q: "The Bishop score is used to assess:", options: ["Fetal well-being", "How favourable the cervix is for induction of labour", "Blood loss", "The baby's presentation"], answer: 1, why: "The Bishop score grades cervical dilatation, effacement, consistency, position and station to predict induction success." },
+        { topic: "Labour & Birth", q: "Augmentation of labour with oxytocin requires close monitoring because oxytocin can cause:", options: ["Hypotension only", "Uterine hyperstimulation and fetal distress", "Infection", "Placenta praevia"], answer: 1, why: "Too-frequent contractions reduce placental blood flow; contractions and fetal heart must be monitored continuously." },
+        { topic: "Labour & Birth", q: "A vacuum extractor (ventouse) should NOT be used when the fetus is:", options: ["At term with a vertex presentation", "Preterm below about 34 weeks or with a face presentation", "In the second stage with full dilatation", "With the head engaged"], answer: 1, why: "Vacuum delivery needs a term or near-term vertex with full dilatation; it is unsafe for preterm babies and non-vertex presentations." },
+        { topic: "Labour & Birth", q: "The commonest indication for caesarean section in a first labour is:", options: ["Mother's request only", "Failure to progress / cephalopelvic disproportion with fetal concern", "Breech in all cases", "Post-term pregnancy alone"], answer: 1, why: "Slow or obstructed progress with concern for mother or baby is the leading reason for a first caesarean." },
+        { topic: "Labour & Birth", q: "Breech presentation at term is most safely confirmed by:", options: ["Mother's symptoms", "Ultrasound scan", "Vaginal examination alone", "Fundal height"], answer: 1, why: "Ultrasound confirms breech type, head flexion and estimated weight, guiding the plan for external version or delivery." },
+        { topic: "Labour & Birth", q: "External cephalic version (ECV) is an attempt to:", options: ["Deliver the placenta by hand", "Turn a breech baby to head-down through the abdomen", "Start labour with drugs", "Remove a retained placenta"], answer: 1, why: "ECV, usually offered around 36 weeks, turns the baby to cephalic to allow a normal vaginal birth." },
+        { topic: "Labour & Birth", q: "During labour, a supportive companion of the woman's choice is recommended because companionship:", options: ["Has no effect on outcomes", "Improves satisfaction and can shorten labour and reduce interventions", "Replaces the midwife", "Increases infection risk always"], answer: 1, why: "Continuous support in labour is evidence-based: better outcomes and a more positive birth experience." },
+        { topic: "Labour & Birth", q: "Eating and drinking in normal low-risk labour:", options: ["Is absolutely forbidden for all women", "Light oral intake is generally allowed for low-risk women", "Must include only glucose drips", "Causes aspiration in every case"], answer: 1, why: "Low-risk women in labour may take light food and fluids; restriction is reserved for those at high risk of general anaesthesia." },
+        { topic: "Labour & Birth", q: "The best position for the mother in the second stage is:", options: ["Always flat on her back", "The position she finds most comfortable, often upright", "Lithotomy is compulsory", "Standing is never allowed"], answer: 1, why: "Upright and lateral positions can aid descent and are encouraged according to the woman's preference." },
+        { topic: "Labour & Birth", q: "Delayed cord clamping (waiting 1 to 3 minutes) benefits the newborn by:", options: ["Increasing jaundice in all babies", "Improving iron stores and blood volume", "Causing hypothermia", "Preventing all infection"], answer: 1, why: "Delayed clamping transfers extra placental blood, improving haemoglobin and iron stores in infancy." },
+        { topic: "Labour & Birth", q: "Immediate skin-to-skin contact after birth helps the newborn by:", options: ["Cooling the baby", "Keeping the baby warm, calm and supporting early breastfeeding", "Replacing the need to dry the baby", "Only pleasing the mother"], answer: 1, why: "Skin-to-skin maintains temperature, stabilises breathing and heart rate, and promotes the first breastfeed." },
+        { topic: "Labour & Birth", q: "Prolonged labour is most dangerous because it increases the risk of:", options: ["Nothing serious", "Obstruction, uterine rupture, fistula, infection and fetal death", "A bigger baby next time", "Faster recovery"], answer: 1, why: "Untreated prolonged or obstructed labour is a major cause of maternal and newborn death and disability." },
+        { topic: "Labour & Birth", q: "On the partograph, crossing the ACTION line means:", options: ["Labour is progressing well", "Active intervention or referral is now required", "The baby has been born", "Stop recording observations"], answer: 1, why: "The action line lies 4 hours to the right of the alert line; crossing it demands action such as augmentation or referral." },
+        { topic: "Labour & Birth", q: "A woman in labour has strong contractions for many hours, a Bandl's ring and no descent. This suggests:", options: ["Normal labour", "Obstructed labour needing urgent referral", "Latent phase", "False labour"], answer: 1, why: "A rising retraction (Bandl's) ring with no progress signals obstruction and risk of uterine rupture." },
+        { topic: "Labour & Birth", q: "Signs of uterine rupture include:", options: ["Pain relief, loss of contractions, abdominal pain and fetal distress or death", "Stronger contractions and rapid progress", "Normal fetal heart and no pain", "Increased vaginal show only"], answer: 0, why: "In rupture, contractions stop, pain and bleeding occur, the presenting part may recede and the fetus is in severe distress." },
+        { topic: "Newborn Care", q: "The FIRST action for every newborn immediately after birth is to:", options: ["Weigh the baby", "Dry the baby thoroughly and keep warm, starting with skin-to-skin", "Bathe the baby", "Cut the cord before drying"], answer: 1, why: "Drying prevents heat loss and stimulates breathing; warmth through skin-to-skin follows at once." },
+        { topic: "Newborn Care", q: "The first bath of a newborn should be delayed at least:", options: ["10 minutes", "6 hours, ideally 24 hours", "Until the cord falls off at 2 weeks", "Bathing is done immediately for all babies"], answer: 1, why: "Delaying the first bath protects temperature and the vernix and supports breastfeeding; WHO advises at least 6, ideally 24 hours." },
+        { topic: "Newborn Care", q: "Vernix caseosa on the newborn's skin should be:", options: ["Scrubbed off at once", "Left in place; it protects the skin and helps temperature control", "Removed with oil and cotton forcefully", "Treated as infection"], answer: 1, why: "Vernix is a natural protective layer that moisturises skin and has antimicrobial properties." },
+        { topic: "Newborn Care", q: "The normal respiratory rate of a newborn at rest is:", options: ["10 to 20 per minute", "20 to 30 per minute", "40 to 60 per minute", "70 to 90 per minute"], answer: 2, why: "Newborns breathe 40 to 60 times per minute; persistent rates above 60 with distress signs need evaluation." },
+        { topic: "Newborn Care", q: "The normal heart rate of a newborn is about:", options: ["60 to 80 bpm", "80 to 100 bpm", "120 to 160 bpm", "180 to 200 bpm"], answer: 2, why: "A newborn heart rate of 120 to 160 bpm is normal; below 100 in resuscitation needs action." },
+        { topic: "Newborn Care", q: "In newborn resuscitation, chest compressions are started when the heart rate remains below:", options: ["120 bpm despite drying", "60 bpm despite effective ventilation", "100 bpm after suction only", "80 bpm at birth"], answer: 1, why: "Ventilation is the priority; compressions begin if the heart rate stays under 60 despite good ventilation." },
+        { topic: "Newborn Care", q: "The most important step in newborn resuscitation is:", options: ["Giving adrenaline first", "Effective ventilation of the lungs with bag and mask", "Chest compressions before any breathing help", "Giving oxygen into the room air"], answer: 1, why: "Most newborns recover with proper ventilation; a rising heart rate is the best sign it is working." },
+        { topic: "Newborn Care", q: "Meconium passed by the newborn in the first days is:", options: ["Bright red", "Dark green-black, sticky stool", "Yellow and seedy", "Watery with blood"], answer: 1, why: "Meconium is the dark, sticky first stool, usually passed within 24 to 48 hours." },
+        { topic: "Newborn Care", q: "Failure to pass meconium within 48 hours may indicate:", options: ["Normal variation always", "Intestinal obstruction needing evaluation", "Overfeeding", "Jaundice"], answer: 1, why: "Delayed meconium passage can signal Hirschsprung disease or another obstruction." },
+        { topic: "Newborn Care", q: "Physiological jaundice of the newborn typically appears:", options: ["In the first 24 hours of life", "After 24 hours, peaking around day 3 to 5", "Only after 2 weeks", "Before birth"], answer: 1, why: "Jaundice in the first 24 hours is pathological and needs urgent work-up; physiological jaundice appears later." },
+        { topic: "Newborn Care", q: "Jaundice appearing in the FIRST 24 hours of life is:", options: ["Always normal", "Pathological — investigate urgently for haemolysis or infection", "Due to breastfeeding only", "Treated by sunlight alone at home"], answer: 1, why: "Early jaundice suggests blood group incompatibility, G6PD deficiency or sepsis and needs hospital evaluation." },
+        { topic: "Newborn Care", q: "The treatment for significant newborn jaundice is mainly:", options: ["Antibiotics for all babies", "Phototherapy, with exchange transfusion in severe cases", "Stopping breastfeeding permanently", "Giving glucose water"], answer: 1, why: "Phototherapy breaks down bilirubin in the skin; severe levels may need exchange transfusion." },
+        { topic: "Newborn Care", q: "Kernicterus is brain damage in the newborn caused by:", options: ["Low blood sugar", "Very high bilirubin entering the brain", "Low calcium", "Vitamin K deficiency"], answer: 1, why: "Untreated severe hyperbilirubinaemia can stain and damage the basal ganglia, causing kernicterus." },
+        { topic: "Newborn Care", q: "The umbilical cord stump normally falls off within:", options: ["24 hours", "5 to 15 days", "6 weeks", "3 months"], answer: 1, why: "The cord usually separates in 1 to 2 weeks; redness, foul smell or discharge suggests infection (omphalitis)." },
+        { topic: "Newborn Care", q: "Recommended cord care in a clean home birth setting is:", options: ["Apply cow dung or ash", "Keep the cord clean and dry; apply chlorhexidine where advised by local policy", "Cover tightly with a bandage always", "Apply mustard oil daily"], answer: 1, why: "Dry cord care is standard; chlorhexidine application is recommended in high-mortality settings. Harmful substances must never be applied." },
+        { topic: "Newborn Care", q: "A newborn with a temperature of 35.8 °C is:", options: ["Normal", "Hypothermic — needs warming and assessment", "Febrile", "In need of a cold sponge"], answer: 1, why: "Below 36.5 °C is hypothermia; rewarm gradually with skin-to-skin and seek causes such as infection." },
+        { topic: "Newborn Care", q: "Signs of possible severe bacterial infection in a young infant include:", options: ["Crying strongly and feeding well", "Not feeding, fast breathing, chest indrawing, fever or low temperature, convulsions", "Hiccups after feeds", "Sneezing occasionally"], answer: 1, why: "The young infant study signs — poor feeding, respiratory distress, temperature instability, convulsions — need urgent referral." },
+        { topic: "Newborn Care", q: "Exclusive breastfeeding means the baby receives:", options: ["Breast milk plus water", "Only breast milk, no other food or drink except medicines and vitamins", "Breast milk plus formula", "Breast milk plus honey"], answer: 1, why: "Exclusive breastfeeding for 6 months means breast milk only; water and prelacteal feeds are excluded." },
+        { topic: "Newborn Care", q: "Breastfeeding should ideally be started within:", options: ["6 hours of birth", "The first hour of birth (the golden hour)", "24 hours of birth", "After the mother's milk 'comes in' on day 3"], answer: 1, why: "Early initiation within one hour protects against infection and supports milk production." },
+        { topic: "Newborn Care", q: "A sign of GOOD attachment at the breast is:", options: ["Only the nipple in the baby's mouth", "Chin touching breast, mouth wide, more areola visible above the mouth, slow deep sucks", "Clicking sounds with every suck", "The baby's cheeks pulled in sharply"], answer: 1, why: "Good attachment gives effective, pain-free feeding and prevents sore nipples." },
+        { topic: "Newborn Care", q: "A baby should be fed on demand, which typically means at least:", options: ["4 times a day", "8 to 12 times in 24 hours", "Only when crying loudly", "Every 6 hours strictly"], answer: 1, why: "Newborns feed 8 to 12 times daily; frequent feeding builds milk supply and prevents hypoglycaemia." },
+        { topic: "Newborn Care", q: "Hypoglycaemia in the newborn is most likely in babies who are:", options: ["Term and feeding well", "Preterm, growth-restricted or born to diabetic mothers", "Born by vaginal delivery", "Exclusively breastfed on day 5"], answer: 1, why: "Preterm, small and infants of diabetic mothers have low stores or high insulin and need glucose monitoring." },
+        { topic: "Newborn Care", q: "A preterm baby is one born before:", options: ["38 weeks", "37 completed weeks", "36 weeks from EDD only", "40 weeks"], answer: 1, why: "Preterm birth is delivery before 37 completed weeks of gestation." },
+        { topic: "Newborn Care", q: "Respiratory distress syndrome in preterm babies is mainly due to lack of:", options: ["Haemoglobin", "Surfactant in the lungs", "Vitamin K", "Glucose"], answer: 1, why: "Surfactant deficiency makes the alveoli collapse; antenatal steroids to the mother reduce this risk." },
+        { topic: "Newborn Care", q: "Antenatal corticosteroids given to a mother in preterm labour help the baby by:", options: ["Stopping labour permanently", "Maturing the fetal lungs and reducing breathing problems and death", "Increasing birth weight", "Preventing jaundice"], answer: 1, why: "Steroids such as dexamethasone accelerate lung maturity when preterm birth is expected within days." },
+        { topic: "Newborn Care", q: "The Ballard / gestational age assessment of a newborn examines:", options: ["Only weight", "Physical and neuromuscular maturity signs", "Blood group", "Head circumference only"], answer: 1, why: "Scoring skin, lanugo, reflexes and muscle tone estimates gestational age when dates are uncertain." },
+        { topic: "Newborn Care", q: "A newborn's normal blood glucose concern threshold commonly used is below:", options: ["100 mg/dL", "70 mg/dL", "45 mg/dL", "25 mg/dL"], answer: 2, why: "Values below about 45 mg/dL (2.5 mmol/L) in a newborn need feeding or treatment and monitoring." },
+        { topic: "Newborn Care", q: "The Moro (startle) reflex disappears by about:", options: ["2 weeks", "4 to 6 months", "1 year", "2 years"], answer: 1, why: "Primitive reflexes such as Moro fade by 4 to 6 months as the nervous system matures." },
+        { topic: "Newborn Care", q: "The rooting reflex helps the newborn to:", options: ["Walk early", "Turn the head towards a stimulus and find the breast", "Grasp objects", "Cry loudly"], answer: 1, why: "Touching the cheek makes the baby turn and open the mouth, helping breastfeeding." },
+        { topic: "Newborn Care", q: "A cephalohaematoma differs from caput because it:", options: ["Crosses suture lines", "Is limited to one skull bone and may take weeks to resolve", "Appears on the face", "Resolves within hours"], answer: 1, why: "Cephalohaematoma is blood under the periosteum of one bone, so it does not cross sutures." },
+        { topic: "Newborn Care", q: "OPV-0 given at birth is the vaccine against:", options: ["Tuberculosis", "Poliomyelitis", "Hepatitis A", "Measles"], answer: 1, why: "The zero dose of oral polio vaccine is given at birth along with BCG and hepatitis B in many schedules." },
+        { topic: "Newborn Care", q: "The hepatitis B birth dose is ideally given within:", options: ["24 hours of birth", "6 weeks", "9 months", "Only if the mother is infected"], answer: 0, why: "A birth dose within 24 hours prevents mother-to-child transmission of hepatitis B." },
+        { topic: "Newborn Care", q: "A baby born to an HIV-positive mother who is on treatment should be:", options: ["Never breastfed in any circumstance", "Managed per national guidelines with maternal ART, infant prophylaxis and supported feeding choice", "Separated from the mother", "Given no immunisation"], answer: 1, why: "With effective treatment the transmission risk is low; care follows national PMTCT guidance without separating mother and baby." },
+        { topic: "Newborn Care", q: "An umbilical hernia in a newborn usually:", options: ["Needs emergency surgery at birth", "Resolves on its own in the first years of life", "Is a sign of infection", "Must be strapped tightly"], answer: 1, why: "Most umbilical hernias close spontaneously; surgery is for large, persistent or complicated ones." },
+        { topic: "Newborn Care", q: "The safest sleeping position for a newborn to reduce sudden infant death is:", options: ["On the stomach", "On the back", "On the side with pillows", "In the parents' arms all night"], answer: 1, why: "Back sleeping on a firm, flat surface with no soft bedding reduces the risk of SIDS." },
+        { topic: "Newborn Care", q: "A newborn who is floppy, not breathing after drying and stimulation needs:", options: ["More stimulation for 5 minutes", "Bag-and-mask ventilation started promptly", "A bath in warm water", "Glucose water by mouth"], answer: 1, why: "If the baby does not breathe after initial steps, ventilation must start within the first minute — the golden minute." },
+        { topic: "Newborn Care", q: "Counting a newborn's breathing, a rate over 60 per minute with grunting and chest indrawing indicates:", options: ["Normal newborn breathing", "Respiratory distress needing assessment and referral", "Hunger", "A full stomach"], answer: 1, why: "Tachypnoea with indrawing and grunting signals breathing difficulty such as infection or lung disease." },
+        { topic: "Anatomy & Physiology", q: "The uterus is normally positioned:", options: ["Retroverted and retroflexed in all women", "Anteverted and anteflexed", "Horizontal", "Inside the pelvis only during pregnancy"], answer: 1, why: "The normal uterus tilts forward (anteversion) and bends forward on the cervix (anteflexion)." },
+        { topic: "Anatomy & Physiology", q: "The layer of the uterus that sheds during menstruation is the:", options: ["Perimetrium", "Myometrium", "Endometrium (functional layer)", "Cervical canal lining"], answer: 2, why: "The functional layer of the endometrium is shed each cycle if pregnancy does not occur." },
+        { topic: "Anatomy & Physiology", q: "The muscular layer of the uterus responsible for contractions in labour is the:", options: ["Endometrium", "Myometrium", "Perimetrium", "Decidua"], answer: 1, why: "The myometrium is thick smooth muscle whose coordinated contractions expel the baby." },
+        { topic: "Anatomy & Physiology", q: "Fertilisation normally takes place in the:", options: ["Uterine cavity", "Ampulla of the fallopian tube", "Cervix", "Ovary"], answer: 1, why: "Sperm and ovum meet in the ampullary part of the tube; the fertilised egg then travels to the uterus." },
+        { topic: "Anatomy & Physiology", q: "The placenta develops from the:", options: ["Maternal skin", "Chorion frondosum of the conceptus and decidua basalis of the mother", "Umbilical cord", "Amnion only"], answer: 1, why: "The placenta has a fetal part (chorion) and a maternal part (decidua basalis) that together form the exchange organ." },
+        { topic: "Anatomy & Physiology", q: "The main functions of the placenta include:", options: ["Producing urine for the fetus", "Exchange of oxygen, nutrients and waste, plus hormone production", "Filtering the mother's blood cells into the fetus", "Making the fetal heartbeat"], answer: 1, why: "The placenta transfers gases and nutrients, removes waste and secretes hCG, progesterone and oestrogen." },
+        { topic: "Anatomy & Physiology", q: "Human chorionic gonadotropin (hCG) in early pregnancy maintains the:", options: ["Placenta after birth", "Corpus luteum so it keeps producing progesterone", "Fetal lungs", "Mother's milk supply"], answer: 1, why: "hCG rescues the corpus luteum until the placenta takes over progesterone production at about 10 to 12 weeks." },
+        { topic: "Anatomy & Physiology", q: "The foramen ovale in the fetal heart allows blood to pass from the:", options: ["Left atrium to right atrium", "Right atrium to left atrium, bypassing the lungs", "Aorta to pulmonary artery", "Umbilical vein to the liver only"], answer: 1, why: "Oxygenated placental blood crosses from right to left atrium through the foramen ovale, largely bypassing the fluid-filled lungs." },
+        { topic: "Anatomy & Physiology", q: "The ductus arteriosus connects the:", options: ["Two umbilical arteries", "Pulmonary artery to the aorta", "Umbilical vein to the vena cava", "Two atria"], answer: 1, why: "The ductus arteriosus shunts blood from the pulmonary artery into the aorta and closes after birth." },
+        { topic: "Anatomy & Physiology", q: "After birth, the umbilical vein becomes the:", options: ["Ligamentum teres of the liver", "Median umbilical ligament", "Ductus venosus itself", "Inferior vena cava"], answer: 0, why: "The obliterated umbilical vein forms the ligamentum teres; the ductus venosus becomes the ligamentum venosum." },
+        { topic: "Anatomy & Physiology", q: "Wharton's jelly in the umbilical cord functions to:", options: ["Produce hormones", "Protect the cord vessels from compression", "Feed the placenta", "Make amniotic fluid"], answer: 1, why: "The gelatinous Wharton's jelly cushions the two arteries and one vein inside the cord." },
+        { topic: "Anatomy & Physiology", q: "The amnion is the membrane that:", options: ["Lines the uterus on the outside", "Directly surrounds the fetus and holds the amniotic fluid", "Forms the placenta only", "Becomes the cord"], answer: 1, why: "The inner amnion encloses the fetus in fluid; the outer chorion lies against the uterine wall." },
+        { topic: "Anatomy & Physiology", q: "Amniotic fluid is mainly produced in later pregnancy by:", options: ["The mother's kidneys", "Fetal urine and lung secretions", "The placenta only in the first week", "The cord"], answer: 1, why: "By mid-pregnancy fetal urine is the main source, balanced by fetal swallowing." },
+        { topic: "Anatomy & Physiology", q: "The pelvic brim is bounded posteriorly by the:", options: ["Symphysis pubis", "Sacral promontory", "Ischial spines", "Coccyx"], answer: 1, why: "The sacral promontory forms the back of the pelvic inlet; the symphysis pubis is at the front." },
+        { topic: "Anatomy & Physiology", q: "The shortest and most important diameter of the pelvic outlet for delivery is measured at the level of the:", options: ["Ischial spines (interspinous diameter, about 10.5 cm)", "Sacral promontory", "Obturator foramen", "Pubic arch skin"], answer: 0, why: "The interspinous diameter is the narrowest plane the head must pass in the mid-pelvis." },
+        { topic: "Anatomy & Physiology", q: "The obstetric conjugate of the pelvic brim is approximately:", options: ["13 cm", "11 cm", "9 cm", "15 cm"], answer: 1, why: "The obstetric conjugate (about 11 cm) is the shortest front-to-back diameter of the inlet available for the head." },
+        { topic: "Anatomy & Physiology", q: "The fetal skull bones are joined by sutures; the suture between the two parietal bones is the:", options: ["Coronal suture", "Sagittal suture", "Lambdoidal suture", "Frontal suture"], answer: 1, why: "The sagittal suture runs between the parietal bones and helps identify head position in labour." },
+        { topic: "Anatomy & Physiology", q: "The anterior fontanelle (bregma) normally closes by about:", options: ["6 weeks", "6 months", "18 months", "5 years"], answer: 2, why: "The diamond-shaped anterior fontanelle closes around 18 months; the posterior fontanelle closes by 6 to 8 weeks." },
+        { topic: "Anatomy & Physiology", q: "The posterior fontanelle is shaped:", options: ["Diamond", "Triangular (Y-shaped)", "Square", "Round"], answer: 1, why: "The posterior fontanelle is small and triangular, formed where the sagittal and lambdoidal sutures meet." },
+        { topic: "Anatomy & Physiology", q: "The engaging diameter of a well-flexed vertex head is the:", options: ["Occipitofrontal, 11.5 cm", "Suboccipitobregmatic, about 9.5 cm", "Mentovertical, 13.5 cm", "Bitemporal, 8 cm"], answer: 1, why: "Full flexion presents the suboccipitobregmatic diameter (9.5 cm), the smallest and most favourable." },
+        { topic: "Anatomy & Physiology", q: "A brow presentation presents the mentovertical diameter of about:", options: ["9.5 cm", "10.5 cm", "13.5 cm", "11 cm"], answer: 2, why: "At 13.5 cm the brow's mentovertical diameter is too large for vaginal delivery unless it converts." },
+        { topic: "Anatomy & Physiology", q: "The hormone that triggers ovulation through its mid-cycle surge is:", options: ["Progesterone", "Luteinising hormone (LH)", "Prolactin", "Oxytocin"], answer: 1, why: "The LH surge about 24 to 36 hours before ovulation causes the mature follicle to release the ovum." },
+        { topic: "Anatomy & Physiology", q: "After ovulation, the ruptured follicle becomes the:", options: ["Graafian follicle", "Corpus luteum", "Corpus albicans only if fertilised", "Primordial follicle"], answer: 1, why: "The corpus luteum secretes progesterone; without pregnancy it fades into the corpus albicans." },
+        { topic: "Anatomy & Physiology", q: "The proliferative phase of the menstrual cycle is driven by:", options: ["Progesterone", "Oestrogen", "hCG", "Prolactin"], answer: 1, why: "Oestrogen rebuilds the endometrium after menstruation; progesterone dominates the secretory phase after ovulation." },
+        { topic: "Anatomy & Physiology", q: "Menarche is:", options: ["The last menstrual period of life", "The first menstrual period, usually around 11 to 14 years", "Painful menstruation", "Absence of periods in pregnancy"], answer: 1, why: "Menarche marks the start of menstrual cycles at puberty; menopause is the final period." },
+        { topic: "Anatomy & Physiology", q: "The average blood loss during a normal menstrual period is about:", options: ["10 mL", "30 to 80 mL", "200 mL", "500 mL"], answer: 1, why: "Normal menstrual loss is roughly 30 to 80 mL; loss over 80 mL is heavy menstrual bleeding." },
+        { topic: "Anatomy & Physiology", q: "The cervix is mainly composed of:", options: ["Skeletal muscle", "Fibrous connective tissue with some smooth muscle", "Bone", "Fat"], answer: 1, why: "The cervix is firm and fibrous, which is why it softens and ripens under hormonal influence before labour." },
+        { topic: "Anatomy & Physiology", q: "Bartholin's glands are located in the:", options: ["Breast", "Vulva, opening on either side of the vaginal opening", "Cervix", "Uterus"], answer: 1, why: "Bartholin's glands lubricate the vaginal entrance; blockage causes a Bartholin's cyst or abscess." },
+        { topic: "Anatomy & Physiology", q: "The perineum in midwifery is the region between the:", options: ["Umbilicus and symphysis", "Vaginal opening and the anus", "Two ischial spines", "Cervix and uterus"], answer: 1, why: "The perineal body between vagina and anus supports the pelvic floor and is protected during birth." },
+        { topic: "Anatomy & Physiology", q: "The pelvic floor is mainly formed by the:", options: ["Gluteus maximus", "Levator ani muscles", "Rectus abdominis", "Diaphragm"], answer: 1, why: "The levator ani sling supports the pelvic organs and stretches during the second stage." },
+        { topic: "Anatomy & Physiology", q: "Breast milk is produced in the:", options: ["Fat tissue", "Alveoli (glandular tissue) of the breast", "Nipple ducts only", "Chest muscles"], answer: 1, why: "Alveolar cells secrete milk, which travels through ducts to the nipple under oxytocin-driven ejection." },
+        { topic: "Anatomy & Physiology", q: "The milk ejection (let-down) reflex is triggered by:", options: ["Prolactin", "Oxytocin released when the baby suckles", "Adrenaline", "Progesterone"], answer: 1, why: "Suckling sends signals that release oxytocin, contracting the cells around the alveoli to push milk out." },
+        { topic: "Anatomy & Physiology", q: "During pregnancy, cardiac output:", options: ["Falls by half", "Increases by about 30 to 50 percent", "Does not change", "Stops rising after 12 weeks"], answer: 1, why: "Blood volume and cardiac output rise markedly to supply the placenta and maternal organs." },
+        { topic: "Anatomy & Physiology", q: "The decidua is the:", options: ["Fetal membrane", "Endometrium of pregnancy after implantation", "Muscle of the cervix", "Placenta after delivery"], answer: 1, why: "Under progesterone the endometrium becomes the decidua that nourishes and anchors the early conceptus." },
+        { topic: "Anatomy & Physiology", q: "Twins from two separately fertilised ova are called:", options: ["Monozygotic", "Dizygotic (fraternal)", "Conjoined", "Identical"], answer: 1, why: "Dizygotic twins have separate placentas and may be of different sexes; monozygotic twins come from one egg." },
+        { topic: "Anatomy & Physiology", q: "The sperm determines the baby's sex because sperm carry:", options: ["Only X chromosomes", "Either an X or a Y chromosome", "No chromosomes", "Both X and Y always"], answer: 1, why: "The ovum always carries X; an X-bearing sperm gives a girl (XX) and a Y-bearing sperm a boy (XY)." },
+        { topic: "Anatomy & Physiology", q: "Implantation bleeding, when it occurs, happens about:", options: ["At the time of delivery", "6 to 12 days after fertilisation, around the missed period", "At 20 weeks", "During ovulation of the next cycle"], answer: 1, why: "Light spotting can occur as the blastocyst embeds, sometimes mistaken for a light period." },
+        { topic: "Anatomy & Physiology", q: "The embryonic period, when major organs form and the embryo is most sensitive to teratogens, is:", options: ["Weeks 3 to 8 after fertilisation", "Weeks 20 to 28", "The last month", "After birth"], answer: 0, why: "Organogenesis in weeks 3 to 8 is the most vulnerable time for structural malformations." },
+        { topic: "Anatomy & Physiology", q: "The fetal heart begins to beat at about:", options: ["3 to 4 weeks after fertilisation", "12 weeks", "20 weeks", "28 weeks"], answer: 0, why: "Cardiac activity starts around day 22 and can be seen on transvaginal ultrasound by about 6 weeks of gestation." },
+        { topic: "Anatomy & Physiology", q: "Surfactant production in the fetal lungs becomes adequate for breathing air at around:", options: ["12 weeks", "20 weeks", "34 to 36 weeks", "Only after birth"], answer: 2, why: "Surfactant matures by about 34 to 36 weeks, which is why preterm babies struggle to keep lungs open." },
+        { topic: "Anatomy & Physiology", q: "The blood vessel carrying oxygenated blood from the placenta to the fetus is the:", options: ["Umbilical arteries", "Umbilical vein", "Aorta", "Ductus arteriosus"], answer: 1, why: "Uniquely, the umbilical vein carries oxygen-rich blood; the two umbilical arteries carry deoxygenated blood away." },
+        { topic: "Anatomy & Physiology", q: "Relaxin hormone in pregnancy mainly:", options: ["Starts labour", "Softens ligaments and the cervix", "Produces milk", "Raises blood pressure"], answer: 1, why: "Relaxin loosens pelvic ligaments and softens connective tissue, preparing the pelvis for birth." },
+        { topic: "Reproductive Health", q: "Combined oral contraceptive pills mainly prevent pregnancy by:", options: ["Killing sperm", "Suppressing ovulation", "Blocking the cervix permanently", "Thinning the bones"], answer: 1, why: "The pill's oestrogen and progestogen suppress FSH and LH, preventing ovulation, and thicken cervical mucus." },
+        { topic: "Reproductive Health", q: "A woman who misses oral contraceptive pills and has unprotected sex should be advised about:", options: ["Nothing", "Emergency contraception and backup condoms for 7 days", "Stopping the pill forever", "Double dose for a month"], answer: 1, why: "Missed pills reduce protection; emergency contraception may be needed plus 7 days of additional precautions." },
+        { topic: "Reproductive Health", q: "The progestogen-only injectable (such as DMPA) is given every:", options: ["Month", "3 months", "Year", "Week"], answer: 1, why: "Depot medroxyprogesterone acetate is injected every 3 months and commonly delays return of periods." },
+        { topic: "Reproductive Health", q: "A common side effect of the contraceptive implant is:", options: ["Permanent infertility", "Irregular or absent bleeding", "Weight loss of 10 kg", "Hair loss in all users"], answer: 1, why: "Implants often change bleeding patterns; fertility returns quickly after removal." },
+        { topic: "Reproductive Health", q: "An IUCD should be checked after insertion mainly by:", options: ["X-ray every month", "Feeling for the threads after each period", "Blood tests", "Ultrasound every week"], answer: 1, why: "Thread checks confirm the device is still in place; missing threads need review for expulsion or displacement." },
+        { topic: "Reproductive Health", q: "The fertility awareness method requires the couple to:", options: ["Take daily tablets", "Identify the fertile window from cycle signs and avoid unprotected sex then", "Use a device permanently", "Have surgery"], answer: 1, why: "Methods such as the Standard Days and cervical mucus methods track fertile days; they need training and regular cycles." },
+        { topic: "Reproductive Health", q: "The fertile window in a cycle is roughly:", options: ["Only the day of menstruation", "The 5 days before ovulation and the day of ovulation itself", "The whole month equally", "Only after the next period starts"], answer: 1, why: "Sperm live up to 5 days and the egg about 24 hours, making the days just before ovulation most fertile." },
+        { topic: "Reproductive Health", q: "Cervical cancer screening with a Pap smear or VIA detects:", options: ["Ovarian cysts", "Precancerous changes of the cervix before cancer develops", "Pregnancy", "Fibroids"], answer: 1, why: "Screening finds and allows treatment of precancerous cervical lesions, preventing invasive cancer." },
+        { topic: "Reproductive Health", q: "The main cause of cervical cancer is persistent infection with:", options: ["HIV", "High-risk human papillomavirus (HPV)", "Candida", "Syphilis"], answer: 1, why: "High-risk HPV types 16 and 18 cause most cervical cancers; vaccination protects against them." },
+        { topic: "Reproductive Health", q: "The HPV vaccine is most effective when given:", options: ["After age 60", "To girls before they become sexually active, commonly 9 to 14 years", "Only during pregnancy", "Only to boys"], answer: 1, why: "Vaccination before HPV exposure gives the strongest protection against cervical cancer." },
+        { topic: "Reproductive Health", q: "Syphilis in pregnancy is dangerous because it can cause:", options: ["Only a rash in the mother", "Miscarriage, stillbirth and congenital syphilis in the baby", "Diabetes", "Twins"], answer: 1, why: "Untreated syphilis crosses the placenta; penicillin treatment in pregnancy prevents congenital infection." },
+        { topic: "Reproductive Health", q: "The drug of choice for treating syphilis in pregnancy is:", options: ["Doxycycline", "Benzathine penicillin G", "Ciprofloxacin", "Metronidazole"], answer: 1, why: "Penicillin is the only proven therapy in pregnancy to treat both mother and fetus; tetracyclines are avoided." },
+        { topic: "Reproductive Health", q: "Genital herpes in late pregnancy matters mainly because:", options: ["It causes infertility at once", "Active lesions at delivery can infect the newborn, sometimes needing caesarean birth", "It stops labour", "It causes twins"], answer: 1, why: "Neonatal herpes can be severe, so active genital lesions at labour usually indicate caesarean delivery." },
+        { topic: "Reproductive Health", q: "Bacterial vaginosis is characterised by:", options: ["Curd-like discharge with itching", "Thin grey discharge with a fishy odour", "Green frothy discharge", "Blood-stained discharge"], answer: 1, why: "BV gives a thin grey, fishy-smelling discharge; candida gives thick white curd-like discharge with itching." },
+        { topic: "Reproductive Health", q: "Vaginal candidiasis (thrush) typically causes:", options: ["Fishy odour", "Thick white curd-like discharge with itching", "Painless ulcer", "No symptoms ever"], answer: 1, why: "Candida infection causes itching and cottage-cheese discharge, common in pregnancy and diabetes." },
+        { topic: "Reproductive Health", q: "Trichomoniasis typically presents with:", options: ["Dry vagina", "Yellow-green frothy discharge with itching", "White curd discharge", "A painless sore"], answer: 1, why: "Trichomonas causes frothy yellow-green discharge; both partners need treatment with metronidazole." },
+        { topic: "Reproductive Health", q: "Pelvic inflammatory disease (PID) is a complication of:", options: ["Untreated sexually transmitted infections ascending to the tubes", "Pregnancy itself", "Menopause", "Constipation"], answer: 0, why: "Chlamydia and gonorrhoea ascending to the uterus and tubes cause PID, risking infertility and ectopic pregnancy." },
+        { topic: "Reproductive Health", q: "Infertility is usually defined as failure to conceive after:", options: ["3 months of trying", "12 months of regular unprotected sex", "5 years in all couples", "One miscarriage"], answer: 1, why: "Couples are investigated after 12 months (6 months if the woman is over 35)." },
+        { topic: "Reproductive Health", q: "The first and simplest test in male infertility is:", options: ["Testicular biopsy", "Semen analysis", "Hormone injections", "Chromosome test"], answer: 1, why: "Semen analysis checks count, motility and shape and should be done alongside female assessment." },
+        { topic: "Reproductive Health", q: "Polycystic ovary syndrome (PCOS) commonly features:", options: ["Regular ovulation and weight loss", "Irregular periods, excess androgen signs and polycystic ovaries", "Early menopause at 30", "Heavy bleeding every week"], answer: 1, why: "PCOS causes infrequent ovulation, acne and excess hair, and is linked with insulin resistance." },
+        { topic: "Reproductive Health", q: "Endometriosis is:", options: ["Infection of the uterus", "Growth of endometrial-like tissue outside the uterus causing pain and infertility", "Cancer of the cervix", "A normal part of every cycle"], answer: 1, why: "Ectopic endometrial tissue bleeds with each cycle, causing pelvic pain, painful periods and infertility." },
+        { topic: "Reproductive Health", q: "A uterine fibroid (leiomyoma) most commonly presents with:", options: ["Amenorrhoea", "Heavy menstrual bleeding and pelvic pressure", "Vaginal discharge", "Infertility in all cases"], answer: 1, why: "Fibroids are benign muscle tumours; submucosal ones especially cause heavy bleeding and anaemia." },
+        { topic: "Reproductive Health", q: "Menopause is confirmed after:", options: ["3 missed periods", "12 months without a period, typically around age 45 to 55", "The first hot flush", "Age 40 in all women"], answer: 1, why: "Menopause is diagnosed retrospectively after one year of amenorrhoea from ovarian failure." },
+        { topic: "Reproductive Health", q: "Postmenopausal bleeding should always be:", options: ["Ignored as normal", "Investigated to exclude endometrial cancer", "Treated with iron only", "Expected every year"], answer: 1, why: "Any bleeding after menopause needs prompt assessment, usually with ultrasound and endometrial sampling." },
+        { topic: "Reproductive Health", q: "Safe abortion care counselling must include:", options: ["Only the procedure details", "Informed consent, options, pain relief, post-abortion care and contraception", "Pressure to choose one method", "No follow-up information"], answer: 1, why: "Comprehensive care covers consent, method choice, warning signs and future contraception without coercion." },
+        { topic: "Reproductive Health", q: "Post-abortion contraception can be started:", options: ["Only after 6 months", "Immediately after the procedure, including long-acting methods", "Never after abortion", "Only pills after one year"], answer: 1, why: "Ovulation can return within 2 weeks, so contraception is offered immediately after abortion care." },
+        { topic: "Reproductive Health", q: "A danger sign after abortion that needs urgent care is:", options: ["Mild cramps for a day", "Heavy bleeding soaking pads, fever or severe pain", "Light spotting for 3 days", "Breast tenderness"], answer: 1, why: "Heavy bleeding, fever and severe pain suggest incomplete abortion or infection needing urgent treatment." },
+        { topic: "Reproductive Health", q: "Menstrual hygiene management includes:", options: ["Using cloth without washing", "Clean absorbents changed regularly, washing with soap and water, safe disposal", "Avoiding bathing during periods", "Staying isolated"], answer: 1, why: "Safe, dignified period care prevents infection and supports school and work participation." },
+        { topic: "Reproductive Health", q: "Dysmenorrhoea means:", options: ["Absent periods", "Painful periods", "Very heavy periods", "Periods after menopause"], answer: 1, why: "Dysmenorrhoea is menstrual pain; amenorrhoea is absent periods and menorrhagia is heavy bleeding." },
+        { topic: "Reproductive Health", q: "Amenorrhoea in a sexually active woman of reproductive age is most commonly due to:", options: ["Menopause under 30", "Pregnancy", "Fibroids", "Thyroid disease only"], answer: 1, why: "Pregnancy is the commonest cause of a missed period and is excluded first with a pregnancy test." },
+        { topic: "Reproductive Health", q: "Breast self-awareness advice includes seeking care for:", options: ["Normal cyclical tenderness only", "A new lump, skin dimpling, nipple discharge or change in shape", "Milk production in pregnancy", "Symmetrical enlargement at puberty"], answer: 1, why: "Persistent lumps or skin and nipple changes need clinical breast examination and imaging." },
+        { topic: "Reproductive Health", q: "Gender-based violence care by a midwife includes:", options: ["Asking the partner to explain", "Private enquiry, first-line support, documentation, treatment and referral", "Reporting to the family first", "Ignoring injuries"], answer: 1, why: "WHO first-line support (LIVES) means listening, validating, safety planning and linking to services, in private." },
+        { topic: "Reproductive Health", q: "Female genital mutilation (FGM) in labour may require:", options: ["No special care", "Assessment and possibly deinfibulation to allow safe birth", "Routine episiotomy for every woman", "Caesarean in all cases"], answer: 1, why: "Scarring from FGM can obstruct labour; planned deinfibulation and sensitive care improve outcomes." },
+        { topic: "Reproductive Health", q: "The recommended interval between pregnancies for best outcomes is at least:", options: ["6 months", "24 months after a live birth before the next pregnancy", "5 years compulsory", "No interval matters"], answer: 1, why: "Waiting about 2 years after a live birth reduces prematurity, low birth weight and maternal anaemia." },
+        { topic: "Reproductive Health", q: "After a caesarean birth, the advised wait before the next pregnancy is at least:", options: ["3 months", "18 to 24 months", "6 weeks", "10 years"], answer: 1, why: "A longer interval after caesarean allows the scar to heal and lowers rupture risk in the next pregnancy." },
+        { topic: "Reproductive Health", q: "Adolescent pregnancy carries higher risk of:", options: ["Nothing extra", "Pre-eclampsia, preterm birth, obstructed labour and anaemia", "Only diabetes", "Post-term pregnancy only"], answer: 1, why: "Young mothers face biological and social risks and need supportive, non-judgmental antenatal care." },
+        { topic: "Reproductive Health", q: "HIV testing in pregnancy is important because treatment:", options: ["Cures HIV", "Greatly reduces transmission to the baby", "Replaces all antenatal care", "Is only for the partner"], answer: 1, why: "Antiretroviral therapy in pregnancy and prophylaxis for the baby cut vertical transmission to very low levels." },
+        { topic: "Reproductive Health", q: "Partner treatment is essential in STI care to prevent:", options: ["reinfection (the ping-pong effect)", "Pregnancy", "Anaemia", "Allergy"], answer: 0, why: "Treating partners stops the couple passing the infection back and forth and protects future fertility." },
+        { topic: "Midwifery Practice", q: "The five moments / key times for hand hygiene in care include:", options: ["Only after touching a patient", "Before and after patient contact, before aseptic tasks, after body fluid exposure and after touching surroundings", "Only when hands look dirty", "Once per shift"], answer: 1, why: "WHO's Five Moments target the points where hand hygiene most effectively breaks transmission." },
+        { topic: "Midwifery Practice", q: "Sterile gloves are required for:", options: ["Taking blood pressure", "Vaginal examination in labour and delivery procedures", "Feeding the baby", "Making the bed"], answer: 1, why: "Clean gloves suit most contact, but examinations and births need sterile gloves to protect the mother and baby." },
+        { topic: "Midwifery Practice", q: "The correct order for putting on PPE and removing it matters because:", options: ["It saves time only", "Removal is when self-contamination most often occurs", "PPE is optional", "Gloves replace hand hygiene"], answer: 1, why: "Doffing contaminated PPE carefully, followed by hand hygiene, protects the midwife and the next patient." },
+        { topic: "Midwifery Practice", q: "A partograph should be started when:", options: ["At the first antenatal visit", "The woman is in the active phase of labour (around 4 to 5 cm dilatation)", "After the baby is born", "Only if labour is prolonged"], answer: 1, why: "Plotting begins in active labour so progress can be judged against the alert line." },
+        { topic: "Midwifery Practice", q: "Vaginal examinations in normal labour are usually performed:", options: ["Every 30 minutes", "About every 4 hours, or when clinically indicated", "Only once at delivery", "Every hour routinely"], answer: 1, why: "Four-hourly assessment balances monitoring progress against infection risk and discomfort." },
+        { topic: "Midwifery Practice", q: "Before discharge after birth, the midwife confirms the mother can:", options: ["Run and exercise", "Recognise danger signs, feed the baby and knows when and where to seek help", "Drive herself home alone", "Stop all medicines without review"], answer: 1, why: "Discharge counselling on bleeding, infection signs, feeding and follow-up keeps mother and baby safe at home." },
+        { topic: "Midwifery Practice", q: "Maternal danger signs in the postnatal period include:", options: ["Mild tiredness", "Heavy bleeding, fever, foul lochia, severe headache or fits", "Afterpains for one day", "Sweating at night once"], answer: 1, why: "These signs suggest haemorrhage, sepsis or eclampsia and need immediate facility care." },
+        { topic: "Midwifery Practice", q: "Lochia normally changes in this order:", options: ["Alba, serosa, rubra", "Rubra (red), serosa (pink-brown), alba (white)", "Serosa, alba, rubra", "Red throughout 6 weeks"], answer: 1, why: "Red lochia lasts a few days, becomes pink-brown, then whitish for up to about 6 weeks." },
+        { topic: "Midwifery Practice", q: "Subinvolution of the uterus may be caused by:", options: ["Early walking", "Retained products of conception or infection", "Breastfeeding", "Drinking fluids"], answer: 1, why: "A uterus that stays large and soft with prolonged red lochia suggests retained tissue or endometritis." },
+        { topic: "Midwifery Practice", q: "Secondary postpartum haemorrhage occurs:", options: ["Within 1 hour of birth", "From 24 hours to 6 weeks after birth", "Only during labour", "Before delivery"], answer: 1, why: "Late bleeding is often due to retained fragments or infection and needs assessment and referral." },
+        { topic: "Midwifery Practice", q: "Engorged breasts on day 3 are best managed by:", options: ["Stopping breastfeeding", "Frequent effective feeding, warm compress before and cold after feeds", "Binding the breasts tightly", "Antibiotics for every mother"], answer: 1, why: "Regular emptying relieves engorgement; antibiotics are only for mastitis." },
+        { topic: "Midwifery Practice", q: "Mastitis is suggested by:", options: ["Both breasts full and soft", "A painful red wedge-shaped area on one breast with fever and flu-like feelings", "Cracked nipple without fever", "Milk leaking at night"], answer: 1, why: "Mastitis is inflammation, often with infection; feeding should continue while treating pain, fever and infection." },
+        { topic: "Midwifery Practice", q: "Postnatal depression differs from 'baby blues' because it:", options: ["Starts before delivery always", "Lasts beyond 2 weeks with persistent low mood, poor sleep and loss of interest", "Is the same as normal tiredness for one day", "Causes fever"], answer: 1, why: "Blues resolve within days; depression persists and needs screening, support and referral." },
+        { topic: "Midwifery Practice", q: "Postpartum psychosis is:", options: ["Common and mild", "A rare emergency with confusion, hallucinations or delusions needing urgent psychiatric care", "Normal after twins", "Treated by rest alone at home"], answer: 1, why: "Psychosis after birth is an emergency because of risk to mother and baby without rapid treatment." },
+        { topic: "Midwifery Practice", q: "The first postnatal check for mother and baby is ideally within:", options: ["6 weeks only", "24 hours of birth, with further checks at 48 to 72 hours, 7 to 14 days and 6 weeks", "3 months", "Only if problems occur"], answer: 1, why: "Most maternal and newborn deaths occur in the first week, so early and repeated postnatal contacts save lives." },
+        { topic: "Midwifery Practice", q: "Perineal care after a tear or episiotomy includes:", options: ["Applying herbal paste", "Front-to-back cleaning, clean pads, hand hygiene and watching for infection signs", "No washing for 2 weeks", "Sitting in hot water for hours"], answer: 1, why: "Gentle hygiene and clean pads promote healing and prevent infection of the perineal wound." },
+        { topic: "Midwifery Practice", q: "A midwife's documentation after delivery should record:", options: ["Only the baby's sex", "Times, observations, drugs given, blood loss, placenta completeness and condition of mother and baby", "Only complications", "Nothing if the birth was normal"], answer: 1, why: "Complete, timely records are a legal document and the basis for safe continuing care and audit." },
+        { topic: "Midwifery Practice", q: "Informed consent means the woman:", options: ["Signs any form without explanation", "Receives understandable information about benefits, risks and alternatives and decides freely", "Must agree with the midwife", "Cannot refuse any procedure"], answer: 1, why: "Consent is a process of information and free choice, not just a signature." },
+        { topic: "Midwifery Practice", q: "Confidentiality in midwifery care means:", options: ["Sharing results with neighbours who ask", "Keeping the woman's information private and sharing only with her consent or for care", "Telling the family everything first", "Posting cases on social media without names"], answer: 1, why: "Privacy and confidentiality are ethical and legal duties that build trust in care." },
+        { topic: "Midwifery Practice", q: "When a midwife is unsure about a clinical finding, the safest action is to:", options: ["Hide it and hope for the best", "Seek senior help or refer according to protocol", "Discharge the woman quickly", "Ask the family to decide"], answer: 1, why: "Working within competence and escalating early is a core professional and safety standard." },
+        { topic: "Midwifery Practice", q: "The cold chain for oxytocin and vaccines requires storage at:", options: ["Room temperature in sunlight", "2 to 8 degrees Celsius", "Below minus 20 always", "Any temperature"], answer: 1, why: "Heat damages oxytocin and vaccines; the 2 to 8 °C cold chain keeps them effective." },
+        { topic: "Midwifery Practice", q: "Before giving any drug, the midwife checks the 'rights' which include:", options: ["Right patient, drug, dose, route and time", "Right colour of the tablet only", "Right brand only", "Right day of the week"], answer: 0, why: "Checking patient, drug, dose, route, time and expiry prevents medication errors." },
+        { topic: "Midwifery Practice", q: "A woman collapses with shock after heavy bleeding. Immediate midwifery actions include:", options: ["Sit her up and give water", "Call for help, lie flat, keep warm, assess airway and circulation, uterine massage and IV access per protocol", "Leave her alone to rest", "Give oral iron first"], answer: 1, why: "Obstetric shock needs rapid resuscitation alongside treating the bleeding cause." },
+        { topic: "Midwifery Practice", q: "Eclampsia first aid during a fit includes:", options: ["Putting a spoon in the mouth", "Protecting from injury, keeping the airway clear, turning to the side, timing the fit and giving magnesium sulfate per protocol", "Holding her down firmly", "Giving oral fluids during the fit"], answer: 1, why: "Nothing goes in the mouth during a fit; airway, safety and magnesium sulfate are the priorities." },
+        { topic: "Midwifery Practice", q: "Magnesium sulfate toxicity is monitored by checking:", options: ["Hair and nails", "Respiratory rate, patellar reflexes and urine output", "Appetite", "Skin colour only"], answer: 1, why: "Loss of reflexes, slow breathing and low urine output warn of magnesium overdose; calcium gluconate is the antidote." },
+        { topic: "Midwifery Practice", q: "The antidote kept ready when magnesium sulfate is used is:", options: ["Vitamin K", "Calcium gluconate", "Naloxone", "Adrenaline"], answer: 1, why: "Calcium gluconate reverses magnesium toxicity such as respiratory depression." },
+        { topic: "Midwifery Practice", q: "Respectful maternity care includes:", options: ["Shouting to speed labour", "Privacy, dignity, communication in her language and freedom from abuse", "Routine procedures without explanation", "Separating mother and baby always"], answer: 1, why: "Respectful care is a right and improves safety because women seek and follow care they trust." },
+        { topic: "Midwifery Practice", q: "A birth plan discussion should cover:", options: ["Only the date of delivery", "Preferred place of birth, companion, pain relief, feeding plans and emergency preferences", "The baby's future school", "Nothing, plans are useless"], answer: 1, why: "Planning with flexibility prepares the woman while accepting that labour may change course." },
+        { topic: "Midwifery Practice", q: "Screening a newborn before discharge includes checking:", options: ["Only weight", "Feeding, temperature, cord, breathing, jaundice and danger signs", "School readiness", "Blood pressure in both arms routinely"], answer: 1, why: "A full newborn check plus danger-sign counselling is essential before the family goes home." },
+        { topic: "Midwifery Practice", q: "When referring a sick newborn, the transport priorities are:", options: ["Speed only", "Keep warm, support breathing and feeding plan, referral note and mother accompanying if possible", "Bathe the baby first", "Wait until morning"], answer: 1, why: "Warmth and oxygen during transfer, with clear communication, greatly improve survival." },
+        { topic: "Midwifery Practice", q: "Audit and review of maternal deaths mainly aims to:", options: ["Blame individual staff", "Learn lessons and improve systems so deaths are prevented", "Publish names in newspapers", "Stop all deliveries at the facility"], answer: 1, why: "Confidential review identifies delays and system gaps — no-blame learning saves future lives." },
+        { topic: "Midwifery Practice", q: "The 'three delays' model in maternal care describes delays in:", options: ["Booking, scanning and delivering", "Deciding to seek care, reaching care and receiving adequate care", "Paying, registering and discharging", "Labour stages"], answer: 1, why: "Most maternal deaths involve one or more of these delays; services plan against each of them." },
+        { topic: "Midwifery Practice", q: "Sharps safety after an injection requires:", options: ["Recapping the needle with two hands", "Immediate disposal into a sharps container without recapping", "Throwing into general waste", "Bending the needle by hand"], answer: 1, why: "Needle-stick injuries transmit blood-borne viruses; safe disposal protects staff and the community." },
+        { topic: "Midwifery Practice", q: "Biomedical waste segregation matters because:", options: ["It looks tidy", "Infectious and sharp waste need separate treatment to protect people and the environment", "It saves money only", "All waste can be burned together at the ward"], answer: 1, why: "Colour-coded segregation ensures each waste type is treated safely." },
+        { topic: "Midwifery Practice", q: "A midwife counselling on family planning after birth should FIRST:", options: ["Choose the method for the woman", "Ask about her preferences, health and breastfeeding status, then give balanced information", "Offer only permanent methods", "Refuse contraception before 6 months"], answer: 1, why: "Client-centred counselling respects autonomy and matches methods to medical eligibility and her wishes." },
+        { topic: "Midwifery Practice", q: "Documentation of a referral should include:", options: ["Only the facility name", "Reason for referral, findings, treatment given, vital signs and time", "The midwife's opinion of the family", "Nothing written, verbal only"], answer: 1, why: "A complete referral note lets the receiving team continue care without delay or repetition." },
+        { topic: "Midwifery Practice", q: "The normal blood pressure range aimed for in pregnancy care is generally below:", options: ["160/110 mmHg", "140/90 mmHg", "120/80 is the only normal value for all", "100/60 always"], answer: 1, why: "Blood pressure of 140/90 or more on two readings defines hypertension in pregnancy." },
+        { topic: "Midwifery Practice", q: "Measuring blood pressure correctly in pregnancy requires:", options: ["Any cuff size, arm hanging down", "Correct cuff size, woman seated and rested, arm supported at heart level", "Measuring while she is standing and talking", "A single reading while she walks in"], answer: 1, why: "Technique errors falsely raise or lower readings; correct method gives a trustworthy value." },
+        { topic: "Midwifery Practice", q: "Kegel (pelvic floor) exercises after birth help to:", options: ["Increase bleeding", "Restore pelvic floor strength and bladder control", "Stop milk production", "Close the cervix"], answer: 1, why: "Regular pelvic floor exercises aid recovery and prevent stress incontinence and prolapse." },
+      ];
+
+      var TOPICS = ["All Topics Mixed", "Pregnancy", "Labour & Birth", "Newborn Care", "Anatomy & Physiology", "Reproductive Health", "Midwifery Practice"];
+      var QUIZ_SIZE = 50;       // questions per run, drawn at random from the full bank
+      var TIME_PER_Q = 30;      // seconds per question
+      var ADVANCE_DELAY = 2600; // ms to read feedback before auto-advancing
+
+      var state = {
+        selectedTopic: "All Topics Mixed",
+        list: [], index: 0, score: 0,
+        answers: [], locked: false,
+        timeLeft: TIME_PER_Q, timerId: null, advanceId: null,
+        startedAt: 0,
+        prevOrder: null, // question order of the previous run (to guarantee a different shuffle)
+        prevPos: {}      // correct-answer position per question in the previous run
+      };
+
+      var $ = function (id) { return document.getElementById(id); };
+
+      function shuffle(arr) {
+        var a = arr.slice();
+        for (var i = a.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var t = a[i]; a[i] = a[j]; a[j] = t;
+        }
+        return a;
+      }
+
+      /* ---------- Topic picker ---------- */
+      function buildTopics() {
+        var grid = $("topic-grid");
+        grid.innerHTML = "";
+        TOPICS.forEach(function (t) {
+          var count = t === "All Topics Mixed" ? QUESTIONS.length : QUESTIONS.filter(function (q) { return q.topic === t; }).length;
+          var b = document.createElement("button");
+          b.type = "button";
+          b.className = "topic-btn" + (t === state.selectedTopic ? " selected" : "");
+          b.innerHTML = '<span class="t-name"></span><span class="t-count"></span>';
+          b.querySelector(".t-name").textContent = t;
+          b.querySelector(".t-count").textContent = t === "All Topics Mixed" ? count + " in bank \u00b7 50 per quiz" : count + " questions";
+          b.addEventListener("click", function () {
+            state.selectedTopic = t;
+            var all = grid.querySelectorAll(".topic-btn");
+            for (var i = 0; i < all.length; i++) all[i].classList.remove("selected");
+            b.classList.add("selected");
+          });
+          grid.appendChild(b);
+        });
+        $("chip-total").textContent = QUESTIONS.length + " in bank \u00b7 50 per quiz";
+      }
+
+      /* ---------- Screens ---------- */
+      function show(id) {
+        ["screen-start", "screen-quiz", "screen-result"].forEach(function (s) {
+          $(s).classList.toggle("hidden", s !== id);
+        });
+        window.scrollTo(0, 0);
+      }
+
+      /* ---------- Quiz flow ---------- */
+      function startQuiz() {
+        var pool = state.selectedTopic === "All Topics Mixed"
+          ? QUESTIONS.slice()
+          : QUESTIONS.filter(function (q) { return q.topic === state.selectedTopic; });
+        // Each run draws a fresh random set: QUIZ_SIZE questions picked at
+        // random from the bank, so consecutive runs rarely repeat a set.
+        if (pool.length > QUIZ_SIZE) pool = shuffle(pool).slice(0, QUIZ_SIZE);
+        // Every run reshuffles BOTH the question order and the 4 options of
+        // each question. If a reshuffle happens to reproduce the previous
+        // run's order (or puts a correct answer back in its previous slot),
+        // roll again — so no two runs ever come out the same.
+        var prevOrder = state.prevOrder;
+        var prevPos = state.prevPos || {};
+        var list = null;
+        for (var attempt = 0; attempt < 12; attempt++) {
+          list = shuffle(pool).map(function (q) {
+            // shuffle the options too, remembering the new correct index
+            var order = shuffle([0, 1, 2, 3]);
+            var ans = order.indexOf(q.answer);
+            var tries = 0;
+            while (prevPos[q.q] === ans && tries < 8) {
+              order = shuffle([0, 1, 2, 3]);
+              ans = order.indexOf(q.answer);
+              tries++;
+            }
+            return {
+              topic: q.topic, q: q.q, why: q.why,
+              options: order.map(function (i) { return q.options[i]; }),
+              answer: ans
+            };
+          });
+          if (!prevOrder || list.length !== prevOrder.length) break;
+          var sameOrder = true;
+          for (var k = 0; k < list.length; k++) {
+            if (list[k].q !== prevOrder[k]) { sameOrder = false; break; }
+          }
+          if (!sameOrder) break;
+        }
+        state.list = list;
+        state.prevOrder = list.map(function (it) { return it.q; });
+        state.prevPos = {};
+        list.forEach(function (it) { state.prevPos[it.q] = it.answer; });
+        state.index = 0;
+        state.score = 0;
+        state.answers = [];
+        state.startedAt = Date.now();
+        show("screen-quiz");
+        renderQuestion();
+      }
+
+      function renderQuestion() {
+        clearTimeout(state.advanceId);
+        state.locked = false;
+        var item = state.list[state.index];
+        var total = state.list.length;
+
+        $("q-count").textContent = "Question " + (state.index + 1) + " of " + total;
+        $("q-topic").textContent = item.topic;
+        $("score-now").textContent = state.score;
+        $("progress-fill").style.width = (state.index / total * 100) + "%";
+        $("question-text").textContent = item.q;
+
+        var card = $("question-card");
+        card.classList.remove("pop"); void card.offsetWidth; card.classList.add("pop");
+
+        var box = $("options");
+        box.innerHTML = "";
+        var letters = ["A", "B", "C", "D"];
+        item.options.forEach(function (opt, i) {
+          var b = document.createElement("button");
+          b.type = "button";
+          b.className = "option-btn";
+          b.innerHTML = '<span class="opt-letter">' + letters[i] + '</span><span class="opt-text"></span>' +
+            '<span class="opt-icon ok-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>' +
+            '<span class="opt-icon no-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span>';
+          b.querySelector(".opt-text").textContent = opt;
+          b.querySelector(".ok-icon").style.display = "";
+          b.addEventListener("click", function () { answer(i, b); });
+          box.appendChild(b);
+        });
+
+        var fb = $("feedback");
+        fb.className = "feedback";
+        fb.innerHTML = "";
+        $("next-note").classList.add("hidden");
+
+        startTimer();
+      }
+
+      function startTimer() {
+        clearInterval(state.timerId);
+        state.timeLeft = TIME_PER_Q;
+        drawTimer();
+        state.timerId = setInterval(function () {
+          state.timeLeft -= 1;
+          drawTimer();
+          if (state.timeLeft <= 0) {
+            clearInterval(state.timerId);
+            timeUp();
+          }
+        }, 1000);
+      }
+
+      function drawTimer() {
+        var frac = Math.max(state.timeLeft, 0) / TIME_PER_Q;
+        $("ring-fg").style.strokeDashoffset = String(157 * (1 - frac));
+        $("timer-num").textContent = Math.max(state.timeLeft, 0);
+        $("timer-ring").classList.toggle("low", state.timeLeft <= 8);
+      }
+
+      function lockOptions(chosenIdx) {
+        var item = state.list[state.index];
+        var btns = $("options").children;
+        for (var i = 0; i < btns.length; i++) {
+          btns[i].disabled = true;
+          if (i === item.answer) btns[i].classList.add("correct");
+          else if (i === chosenIdx) btns[i].classList.add("wrong");
+          else btns[i].classList.add("dim");
+          var okIc = btns[i].querySelector(".ok-icon");
+          var noIc = btns[i].querySelector(".no-icon");
+          if (okIc) okIc.style.display = (i === item.answer) ? "block" : "none";
+          if (noIc) noIc.style.display = (i === chosenIdx && chosenIdx !== item.answer) ? "block" : "none";
+        }
+      }
+
+      function showFeedback(isRight, timedOut) {
+        var item = state.list[state.index];
+        var fb = $("feedback");
+        fb.className = "feedback show " + (isRight ? "right" : "wrong");
+        var title = isRight ? "✓ Right!" : (timedOut ? "⏰ Time's up!" : "✗ Wrong!");
+        fb.innerHTML = '<span class="fb-title"></span><span class="fb-why"></span>';
+        fb.querySelector(".fb-title").textContent = title;
+        fb.querySelector(".fb-why").textContent = (isRight ? "" : "Correct answer: " + item.options[item.answer] + ". ") + item.why;
+        $("next-note").classList.remove("hidden");
+        $("next-note").textContent = state.index + 1 < state.list.length
+          ? "Next question coming up…"
+          : "Showing your result…";
+      }
+
+      function scheduleAdvance() {
+        state.advanceId = setTimeout(function () {
+          state.index += 1;
+          if (state.index >= state.list.length) finishQuiz();
+          else renderQuestion();
+        }, ADVANCE_DELAY);
+      }
+
+      function answer(i, btn) {
+        if (state.locked) return;
+        state.locked = true;
+        clearInterval(state.timerId);
+        var item = state.list[state.index];
+        var isRight = i === item.answer;
+        if (isRight) state.score += 1;
+        $("score-now").textContent = state.score;
+        state.answers.push({ chosen: i, timedOut: false });
+        lockOptions(i);
+        showFeedback(isRight, false);
+        scheduleAdvance();
+      }
+
+      function timeUp() {
+        if (state.locked) return;
+        state.locked = true;
+        var item = state.list[state.index];
+        state.answers.push({ chosen: -1, timedOut: true });
+        lockOptions(-1);
+        showFeedback(false, true);
+        scheduleAdvance();
+      }
+
+      /* ---------- Result ---------- */
+      function finishQuiz() {
+        clearInterval(state.timerId);
+        clearTimeout(state.advanceId);
+        var total = state.list.length;
+        var pct = total ? Math.round(state.score / total * 100) : 0;
+
+        show("screen-result");
+        $("result-pct").textContent = pct + "%";
+        $("result-arc").style.strokeDashoffset = String(465 * (1 - pct / 100));
+        $("rs-total").textContent = total;
+        $("rs-correct").textContent = state.score;
+        $("rs-wrong").textContent = total - state.score;
+
+        var title, msg;
+        if (pct >= 80) { title = "Excellent! 🌟"; msg = "You have a strong grip on midwifery. Keep it up — you are exam ready."; }
+        else if (pct >= 60) { title = "Well done!"; msg = "Good knowledge overall. Review the questions below to fix the gaps."; }
+        else if (pct >= 40) { title = "Keep practising"; msg = "You are getting there. Read the explanations in the review and try again."; }
+        else { title = "Don't give up"; msg = "Every midwife starts somewhere. Study the review carefully and restart the quiz."; }
+        $("result-title").textContent = title;
+        $("result-msg").textContent = msg + " Topic: " + state.selectedTopic + ".";
+
+        var list = $("review-list");
+        list.innerHTML = "";
+        state.list.forEach(function (item, idx) {
+          var a = state.answers[idx] || { chosen: -1, timedOut: true };
+          var ok = a.chosen === item.answer;
+          var div = document.createElement("div");
+          div.className = "review-item";
+          var yourText = a.timedOut ? "No answer (time out)" : item.options[a.chosen];
+          div.innerHTML =
+            '<div class="rv-top"><span class="rv-badge ' + (ok ? "ok" : "no") + '">' + (ok ? "✓ RIGHT" : "✗ WRONG") + '</span>' +
+            '<p class="rv-q"></p></div>' +
+            '<div class="rv-topic"></div>' +
+            '<div class="rv-line your-line"></div>' +
+            '<div class="rv-line corr-line"></div>' +
+            '<div class="rv-why"></div>';
+          div.querySelector(".rv-q").textContent = (idx + 1) + ". " + item.q;
+          div.querySelector(".rv-topic").textContent = item.topic;
+          div.querySelector(".your-line").innerHTML = "Your answer: <b></b>";
+          div.querySelector(".your-line b").textContent = yourText;
+          div.querySelector(".corr-line").innerHTML = "Correct answer: <b></b>";
+          div.querySelector(".corr-line b").textContent = item.options[item.answer];
+          div.querySelector(".rv-why").textContent = item.why;
+          list.appendChild(div);
+        });
+      }
+
+      /* ---------- Wiring ---------- */
+      $("btn-start").addEventListener("click", startQuiz);
+      $("btn-restart").addEventListener("click", startQuiz);
+      $("btn-home").addEventListener("click", function () { show("screen-start"); });
+      buildTopics();
+    </script>
+  </body>
+</html>
