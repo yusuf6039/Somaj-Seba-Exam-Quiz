@@ -552,13 +552,11 @@ footer{margin-top:26px; text-align:center; color:var(--muted); font-size:12.5px;
       <div class="spacer"></div>
     </div>
     <div class="res-grid" style="margin-top:16px">
-      <div class="cell"><b id="pg-points">০</b><span>মোট পয়েন্ট</span></div>
-      <div class="cell"><b id="pg-best">০%</b><span>সেরা স্কোর</span></div>
       <div class="cell"><b id="pg-played">০</b><span>টেস্ট দিয়েছেন</span></div>
     </div>
     <div class="sec-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 20v-6M12 20V6M18 20v-9"/><path d="M3 20h18"/></svg>বিষয়ভিত্তিক অগ্রগতি</div>
     <div id="pg-list"></div>
-    <p class="pattern-note">কোন বিষয়ে কতটি প্রশ্ন দেখা হয়েছে তা এই ব্রাউজারে সংরক্ষিত থাকে — পুরো ব্যাংক শেষ না হওয়া পর্যন্ত দেখা প্রশ্ন আবার আসে না। পয়েন্ট ও সেরা স্কোর এই সেশনের হিসাব।</p>
+    <p class="pattern-note">কোন বিষয়ে কতটি প্রশ্ন দেখা হয়েছে তা এই ব্রাউজারে সংরক্ষিত থাকে — পুরো ব্যাংক শেষ না হওয়া পর্যন্ত দেখা প্রশ্ন আবার আসে না।</p>
   </section>
 
   <!-- ============ PROFILE ============ -->
@@ -575,8 +573,6 @@ footer{margin-top:26px; text-align:center; color:var(--muted); font-size:12.5px;
       <div class="pf-rows">
         <div class="pf-row"><span>মোট প্রশ্ন ব্যাংক</span><b id="pf-bank">০</b></div>
         <div class="pf-row"><span>এ পর্যন্ত দেখা প্রশ্ন</span><b id="pf-seen">০</b></div>
-        <div class="pf-row"><span>মোট পয়েন্ট (এই সেশন)</span><b id="pf-points">০</b></div>
-        <div class="pf-row"><span>সেরা স্কোর (এই সেশন)</span><b id="pf-best">০%</b></div>
         <div class="pf-row"><span>টেস্ট দিয়েছেন (এই সেশন)</span><b id="pf-played">০</b></div>
       </div>
     </div>
@@ -16074,8 +16070,6 @@ function renderContinue(){
   el("btn-continue").setAttribute("data-cont", best.s.id);
 }
 function renderProgress(){
-  el("pg-points").textContent = bn(session.points);
-  el("pg-best").textContent = bn(session.best) + "%";
   el("pg-played").textContent = bn(session.played);
   var html = "";
   SUBJECTS.forEach(function(s){
@@ -16092,8 +16086,6 @@ function renderProfile(){
   SUBJECTS.forEach(function(s){ seenTotal += seenInCycle(s); });
   el("pf-bank").textContent = bn(TOTAL_BANK) + "টি";
   el("pf-seen").textContent = bn(seenTotal) + "টি";
-  el("pf-points").textContent = bn(session.points);
-  el("pf-best").textContent = bn(session.best) + "%";
   el("pf-played").textContent = bn(session.played) + "টি";
 }
 function resetProgress(){
